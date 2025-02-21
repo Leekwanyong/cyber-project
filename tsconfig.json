@@ -7,7 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "jsxImportSource": "@emotion/react"
   },
   "include": [
     "src/**/*.ts",
