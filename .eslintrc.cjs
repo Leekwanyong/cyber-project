@@ -29,6 +29,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
         '@typescript-eslint/no-unused-vars': ['error'],
+        "react/no-unknown-property": ["error", { "ignore": ["css"] }],
         'import/extensions': [
             'error',
             'ignorePackages',
