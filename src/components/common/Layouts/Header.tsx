@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
 import { CartIcon, HeartIcon, UserIcon } from '../Icon/index';
 import useDebounce from '../../../hooks/useDebounce';
@@ -36,6 +37,10 @@ function Header() {
       </div>
       <div>
         <TextInput sizeType="primary" value={value} onChange={handleOnChange} />
+      </div>
+
+      <div>
+        <Link to="/product">Product</Link>
       </div>
       <IconWrapper>
         <HeartIcon />
