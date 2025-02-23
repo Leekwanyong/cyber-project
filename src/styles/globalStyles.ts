@@ -132,6 +132,11 @@ const globalStyles = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  html,
+  body {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 `;
 
 export default globalStyles;
