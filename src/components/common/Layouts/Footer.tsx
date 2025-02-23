@@ -1,24 +1,23 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { ASSISTANCE_MENU, SERVICES_MENU } from '../../../types/footer';
 import { FacebookIcon, InstagramIcon, TiktokIcon, TwitterIcon } from '../Icon/index';
+import { ASSISTANCE_MENU, SERVICES_MENU } from '../../../constants/footer';
 
 /** @jsxImportSource @emotion/react */
 
 const Wrapper = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: black;
   gap: 2rem;
   padding: 104px 160px;
-  width: 100%;
 `;
 const FooterWrapper = styled.footer`
   display: flex;
   justify-content: space-between;
   color: white;
-  width: 80%;
+  width: 100%;
 `;
 const UlWrapper = styled.ul`
   display: flex;
