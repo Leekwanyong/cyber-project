@@ -1,9 +1,11 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { getStoreAllListApi, getStoreApi } from '../../../api/getStoreApi';
 import ProductItem from './ProductItem';
 import { Product, ProductListProps } from '../../../types/card';
+import Skeleton from './Skeleton';
 
 const WrapperUl = styled.ul`
   display: flex;
@@ -13,6 +15,10 @@ const WrapperUl = styled.ul`
   gap: 1rem;
   padding: 0;
   list-style: none;
+`;
+
+const WrapperDivRef = styled.div`
+  height: 100px;
 `;
 
 function ProductList({ category, limit }: ProductListProps) {
@@ -63,17 +69,18 @@ function ProductList({ category, limit }: ProductListProps) {
     () => (limit <= 8 ? homeQuery.data || [] : infiniteQuery.data?.pages.flat() || []),
     [limit, homeQuery.data, infiniteQuery.data]
   );
-
-  if (homeQuery.isLoading && infiniteQuery.isLoading) return <p>Loading...</p>;
-  if (homeQuery.isError && infiniteQuery.isError) return <p>Error...</p>;
-
   return (
     <section>
       <WrapperUl>
-        {list?.map((item, index) => (
-          <ProductItem key={item.id} item={item} index={index} limit={limit > 4} />
-        ))}
-        <div ref={observerRef} style={{ height: '100px' }} />
+        {homeQuery.isLoading
+          ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
+          : list?.map((item, index) => (
+              <ProductItem key={item.id} item={item} index={index} limit={limit > 4} />
+            ))}
+        {infiniteQuery.isFetchingNextPage &&
+          Array.from({ length: 12 }).map(() => <Skeleton key={uuidv4()} />)}
+
+        {limit > 8 && <WrapperDivRef ref={observerRef} />}
       </WrapperUl>
     </section>
   );
