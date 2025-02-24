@@ -18,7 +18,7 @@ const Font = css`
         url('../assets/font/NotoSans-Bold.woff') format('woff');
     url('../assets/font/NotoSans-Bold.ttf') format('truetype');
         font-display: swap;
-
+    }
 `;
 
 export default Font;
