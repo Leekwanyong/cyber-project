@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Font from './font';
 
 const globalStyles = css`
   html,
@@ -86,7 +87,6 @@ const globalStyles = css`
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
   }
 
@@ -135,8 +135,13 @@ const globalStyles = css`
   html,
   body {
     max-width: 1440px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     margin: 0 auto;
+    font-family: NotoSans;
   }
+  ${Font}
 `;
 
 export default globalStyles;
