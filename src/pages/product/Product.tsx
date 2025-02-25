@@ -1,8 +1,11 @@
+import Layout from '../../components/common/Layouts/Layout';
+import Aside from './Aside';
+
 function Product() {
   return (
-    <div>
-      <p>Product</p>
-    </div>
+    <Layout>
+      <Aside />
+    </Layout>
   );
 }
 
