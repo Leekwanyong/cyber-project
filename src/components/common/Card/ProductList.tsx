@@ -14,14 +14,13 @@ const WrapperUl = styled.ul`
   margin-top: 10rem;
   gap: 1rem;
   padding: 0;
-  list-style: none;
 `;
 
 const WrapperDivRef = styled.div`
-  height: 100px;
+  height: 200px;
 `;
 
-function ProductList({ category, limit }: ProductListProps) {
+function ProductList({ category, limit, filteredBrands, sortOrder }: ProductListProps) {
   const observerRef = useRef<HTMLDivElement>(null);
   const homeQuery = useQuery<Product[]>({
     queryKey: ['category', category, limit],
@@ -50,7 +49,7 @@ function ProductList({ category, limit }: ProductListProps) {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0 }
     );
   }, [hasNextPage, fetchNextPage]);
 
@@ -65,16 +64,33 @@ function ProductList({ category, limit }: ProductListProps) {
     };
   }, [observerRef, callback]);
 
-  const list = useMemo(
+  const allProducts = useMemo(
     () => (limit <= 8 ? homeQuery.data || [] : infiniteQuery.data?.pages.flat() || []),
     [limit, homeQuery.data, infiniteQuery.data]
   );
+
+  const filteredProducts = useMemo(
+    () =>
+      !filteredBrands || filteredBrands?.length === 0
+        ? allProducts
+        : allProducts.filter((item) => filteredBrands.includes(item.brand)),
+    [filteredBrands, allProducts]
+  );
+
+  const sortOrderData = useMemo(
+    () =>
+      [...(filteredProducts ?? [])].sort((a, b) =>
+        sortOrder === 'asc' ? a.price - b.price : b.price - a.price
+      ),
+    [filteredProducts, sortOrder]
+  );
+
   return (
     <section>
       <WrapperUl>
         {homeQuery.isLoading
           ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
-          : list?.map((item, index) => (
+          : sortOrderData?.map((item, index) => (
               <ProductItem key={item.id} item={item} index={index} limit={limit > 4} />
             ))}
         {infiniteQuery.isFetchingNextPage &&
