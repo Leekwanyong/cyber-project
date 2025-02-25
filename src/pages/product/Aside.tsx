@@ -67,6 +67,7 @@ function Aside() {
           <div key={item}>
             <AsideButton type="button" onClick={() => handleOnToggle(item)}>
               <p>{item}</p>
+              <p>{open[item] ? '▼' : '▲'}</p>
             </AsideButton>
             {open[item] &&
               Object.keys(asideData).map((key) => {
