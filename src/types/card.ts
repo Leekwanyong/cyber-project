@@ -10,6 +10,8 @@ export interface Product {
 type ProductListCategory = 'beauty' | 'vehicle' | 'mobile-accessories';
 
 export interface ProductListProps {
+  filteredBrands?: string[];
+  sortOrder?: string;
   category: ProductListCategory;
   limit: number;
   pageParam?: number;
