@@ -1,4 +1,4 @@
-type Checkbox = Record<string, { id: number; name: string; checked: boolean }[]>;
+type Checkbox = Record<string, { id: number; name: string; checked: boolean; brand: string }[]>;
 
 interface CheckboxInputProps {
   categories: string;
@@ -16,7 +16,7 @@ function CheckboxInput({ data, categories, onChange }: CheckboxInputProps) {
             checked={item.checked}
             onChange={() => onChange(item.id, categories)}
           />
-          <label htmlFor={item.name}>{item.name}</label>
+          <label htmlFor={item.brand}>{item.brand}</label>
         </li>
       ))}
     </div>
