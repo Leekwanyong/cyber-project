@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
 import { CartIcon, HeartIcon, UserIcon } from '../Icon/index';
 import useDebounce from '../../../hooks/useDebounce';
@@ -24,6 +24,7 @@ const IconWrapper = styled.div`
 function Header() {
   const [value, setValue] = useState<string>('');
   const debounce = useDebounce(value, 500);
+  const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -43,7 +44,9 @@ function Header() {
         <Link to="/product">Product</Link>
       </div>
       <IconWrapper>
-        <HeartIcon />
+        <button type="button" onClick={() => navigate('/wishlist')}>
+          <HeartIcon />
+        </button>
         <CartIcon />
         <UserIcon />
       </IconWrapper>
