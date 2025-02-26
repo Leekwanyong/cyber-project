@@ -26,9 +26,12 @@ const AsideButton = styled.button`
 
 function Aside() {
   const [asideData, setAsideData] =
-    useState<Record<string, { id: number; name: string; checked: boolean; brand: string }[]>>(
-      ASIDE_DATA
-    );
+    useState<
+      Record<
+        string,
+        { id: number; name: string; checked: boolean; brand: string; category: string }[]
+      >
+    >(ASIDE_DATA);
   const [open, setOpen] = useState<Record<string, boolean>>({});
 
   const handleChange = useCallback(
@@ -71,13 +74,13 @@ function Aside() {
             </AsideButton>
             {open[item] &&
               Object.keys(asideData).map((key) => {
-                const find = asideData[item].find((label) => label.name === key);
+                const find = asideData[item].find((label) => label.category === key);
                 return (
                   <CheckboxInput
                     key={key}
-                    categories={find?.name as string}
+                    categories={find?.category as string}
                     data={asideData}
-                    onChange={(id) => handleChange(id, find?.name as string)}
+                    onChange={(id) => handleChange(id, find?.category as string)}
                   />
                 );
               })}
