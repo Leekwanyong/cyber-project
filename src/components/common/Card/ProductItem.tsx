@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { CategoryListProps } from '../../../types/card';
+import { useCallback, useEffect, useState } from 'react';
+import { CategoryListProps, Product } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
+import StoredWishlist from '../Cart/StoredWishlist';
 
 const ProductItemWrapper = styled.li`
   width: calc(24%); /* 4개 배치 */
@@ -61,16 +63,46 @@ const ProductIconWrapper = styled.div`
   }
 `;
 
+const HiddenWrapper = styled.div`
+  display: none;
+`;
+
 const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
 function ProductItem({ item, index, limit }: CategoryListProps) {
+  const [open, setOpen] = useState(false);
+  const [saving, setSaving] = useState<Product[]>([]);
+
+  const handleOnToggleClick = useCallback(() => {
+    setOpen((prev) => {
+      const newPrev = !prev;
+      const newSaving = JSON.parse(localStorage.getItem('item') || '[]');
+      const isArray: Product[] = Array.isArray(newSaving) ? newSaving : [];
+      const itemExists = isArray.some((product) => product.id === item.id);
+      const updatedArray = itemExists
+        ? isArray.filter((product) => product.id !== item.id)
+        : [...isArray, item];
+
+      setSaving(updatedArray);
+      localStorage.setItem('item', JSON.stringify(updatedArray) || '[]');
+      return newPrev;
+    });
+  }, [item]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('item') || '[]');
+    setSaving(data);
+  }, []);
+
+  console.log(open, saving);
+
   return (
     <ProductItemWrapper
       css={css`
         background-color: ${limit ? '#F6F6F6' : background[index]};
       `}
     >
-      <ProductIconWrapper>
+      <ProductIconWrapper onClick={handleOnToggleClick}>
         <HeartIcon />
       </ProductIconWrapper>
       <div>
@@ -89,6 +121,9 @@ function ProductItem({ item, index, limit }: CategoryListProps) {
           </Button>
         )}
       </ProductListDescriptionWrapper>
+      <HiddenWrapper>
+        <StoredWishlist localStorageItem={saving} />
+      </HiddenWrapper>
     </ProductItemWrapper>
   );
 }
