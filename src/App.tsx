@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/wishlist" element={<StoredWishlist localStorageItem={[]} />} />
+        <Route path="/wishlist" element={<StoredWishlist />} />
       </Routes>
     </QueryClientProvider>
   );
