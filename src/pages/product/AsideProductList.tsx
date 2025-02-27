@@ -2,7 +2,10 @@
 import { css } from '@emotion/react';
 import React, { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductList from '../../components/common/Card/ProductList';
+import { AppDispatch, RootState } from '../../redux/store';
+import { sortOrderData } from '../../redux/slice/asideSlice';
 
 interface AsideProductListProps {
   filteredBrands: string[];
@@ -55,15 +58,15 @@ const DropdownItemBtn = styled.button`
 `;
 
 function AsideProductList({ filteredBrands }: AsideProductListProps) {
+  const dispatch = useDispatch<AppDispatch>();
+  const { sortOrder } = useSelector((state: RootState) => state.asideSlice);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [sortOrder, setSortOrder] = useState<string>('asc');
 
   const handleToggleDropdown = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  const handleSortChange = useCallback(
-    () => setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc')),
-    []
-  );
+  const handleSortChange = () => {
+    dispatch(sortOrderData());
+  };
   return (
     <div css={noMarginStyle}>
       <div

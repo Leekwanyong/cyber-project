@@ -1,21 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { useCallback, useEffect, useState } from 'react';
-import { CategoryListProps, Product } from '../../../types/card';
+import { useDispatch, useSelector } from 'react-redux';
+import { CategoryListProps } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
 import StoredWishlist from '../Cart/StoredWishlist';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
 
 const ProductItemWrapper = styled.li`
-  width: calc(24%); /* 4개 배치 */
+  width: calc(24%);
 
   @media (max-width: 1024px) {
-    width: calc(50% - 1rem); /* 태블릿: 2개씩 */
+    width: calc(50% - 1rem);
   }
 
   @media (max-width: 768px) {
-    width: 100%; /* 모바일: 1개씩 */
+    width: 100%;
   }
 `;
 
@@ -70,31 +72,12 @@ const HiddenWrapper = styled.div`
 const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
 function ProductItem({ item, index, limit }: CategoryListProps) {
-  const [open, setOpen] = useState(false);
-  const [saving, setSaving] = useState<Product[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
-  const handleOnToggleClick = useCallback(() => {
-    setOpen((prev) => {
-      const newPrev = !prev;
-      const newSaving = JSON.parse(localStorage.getItem('item') || '[]');
-      const isArray: Product[] = Array.isArray(newSaving) ? newSaving : [];
-      const itemExists = isArray.some((product) => product.id === item.id);
-      const updatedArray = itemExists
-        ? isArray.filter((product) => product.id !== item.id)
-        : [...isArray, item];
-
-      setSaving(updatedArray);
-      localStorage.setItem('item', JSON.stringify(updatedArray) || '[]');
-      return newPrev;
-    });
-  }, [item]);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('item') || '[]');
-    setSaving(data);
-  }, []);
-
-  console.log(open, saving);
+  const handleOnToggleClick = () => {
+    dispatch(toggleWishlist(item));
+  };
 
   return (
     <ProductItemWrapper
@@ -122,7 +105,7 @@ function ProductItem({ item, index, limit }: CategoryListProps) {
         )}
       </ProductListDescriptionWrapper>
       <HiddenWrapper>
-        <StoredWishlist localStorageItem={saving} />
+        <StoredWishlist localStorageItem={wishlist} />
       </HiddenWrapper>
     </ProductItemWrapper>
   );
