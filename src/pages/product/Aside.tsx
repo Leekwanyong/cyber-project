@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import styled from '@emotion/styled';
+import { useDispatch, useSelector } from 'react-redux';
 import CheckboxInput from '../../components/common/Input/CheckboxInput';
 import AsideProductList from './AsideProductList';
-import { ASIDE_DATA, LABEL_MENU } from '../../constants/aside';
+import { LABEL_MENU } from '../../constants/aside';
+import { AppDispatch, RootState } from '../../redux/store';
+import { onOpen, onToggleChecked } from '../../redux/slice/asideSlice';
 
 const AsideWrapper = styled.aside`
   width: 450px;
@@ -25,29 +28,21 @@ const AsideButton = styled.button`
 `;
 
 function Aside() {
-  const [asideData, setAsideData] =
-    useState<
-      Record<
-        string,
-        { id: number; name: string; checked: boolean; brand: string; category: string }[]
-      >
-    >(ASIDE_DATA);
-  const [open, setOpen] = useState<Record<string, boolean>>({});
+  const dispatch = useDispatch<AppDispatch>();
+  const { asideData, open } = useSelector((state: RootState) => state.asideSlice);
 
   const handleChange = useCallback(
-    (id: number, value: string) =>
-      setAsideData((prev) => ({
-        ...prev,
-        [value]: prev[value].map((item) =>
-          item.id === id ? { ...item, checked: !item.checked } : item
-        ),
-      })),
-    []
+    (id: number, value: string) => {
+      dispatch(onToggleChecked({ id, value }));
+    },
+    [dispatch]
   );
 
   const handleOnToggle = useCallback(
-    (value: string) => setOpen((prev) => ({ ...prev, [value]: !prev[value] })),
-    []
+    (value: string) => {
+      dispatch(onOpen({ value }));
+    },
+    [dispatch]
   );
 
   const filteredBrands = useMemo(
