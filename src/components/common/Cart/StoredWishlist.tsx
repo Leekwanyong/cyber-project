@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Product } from '../../../types/card';
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../Layouts/Layout';
-
-interface Props {
-  localStorageItem: Product[];
-}
+import { AppDispatch, RootState } from '../../../redux/store';
+import { removeWishlist } from '../../../redux/slice/wishlistSlice';
 
 const WrapperUl = styled.ul`
   display: flex;
@@ -97,25 +94,14 @@ const RemoveButton = styled.button`
   }
 `;
 
-function StoredWishlist({ localStorageItem }: Props) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  const handleRemove = (id: number) => {
-    const data = JSON.parse(localStorage.getItem('item') || '[]');
-    const isArray = Array.isArray(data) ? data.filter((v) => v.id !== id) : [];
-    localStorage.setItem('item', JSON.stringify(isArray));
-    setProducts(isArray);
-  };
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('item') || '[]');
-    setProducts(data);
-  }, [localStorageItem]);
+function StoredWishlist() {
+  const dispatch = useDispatch<AppDispatch>();
+  const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
   return (
     <Layout>
       <WrapperUl>
-        {products.map((product) => (
+        {wishlist.map((product) => (
           <Card key={product.id}>
             <DescriptionWrapper>
               <ImageWrapper src={product.thumbnail} alt={product.title} />
@@ -125,7 +111,7 @@ function StoredWishlist({ localStorageItem }: Props) {
                 <DescriptionText>{product.description}</DescriptionText>
                 <PriceText>${product.price}</PriceText>
               </TextContent>
-              <RemoveButton onClick={() => handleRemove(product.id)}>X</RemoveButton>
+              <RemoveButton onClick={() => dispatch(removeWishlist(product.id))}>X</RemoveButton>
             </DescriptionWrapper>
           </Card>
         ))}
