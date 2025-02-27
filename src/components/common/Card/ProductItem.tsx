@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CategoryListProps } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
 import StoredWishlist from '../Cart/StoredWishlist';
-import { AppDispatch, RootState } from '../../../redux/store';
+import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
 
 const ProductItemWrapper = styled.li`
@@ -73,7 +73,6 @@ const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
 function ProductItem({ item, index, limit }: CategoryListProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const wishlist = useSelector((state: RootState) => state.wishlist.items);
 
   const handleOnToggleClick = () => {
     dispatch(toggleWishlist(item));
@@ -105,7 +104,7 @@ function ProductItem({ item, index, limit }: CategoryListProps) {
         )}
       </ProductListDescriptionWrapper>
       <HiddenWrapper>
-        <StoredWishlist localStorageItem={wishlist} />
+        <StoredWishlist />
       </HiddenWrapper>
     </ProductItemWrapper>
   );
