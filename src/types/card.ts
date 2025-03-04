@@ -1,3 +1,8 @@
+type ProductListCategory = 'beauty' | 'vehicle' | 'mobile-accessories';
+export type FilterOptions = Record<
+  string,
+  { id: number; name: string; checked: boolean; brand: string; category: string }[]
+>;
 export interface Product {
   id: number;
   brand: string;
@@ -7,30 +12,22 @@ export interface Product {
   price: number;
 }
 
-type ProductListCategory = 'beauty' | 'vehicle' | 'mobile-accessories';
-
-export interface ProductListProps {
-  filteredBrands?: string[];
-  sortOrder?: string;
+export interface HomeProductQuery {
   category: ProductListCategory;
   limit: number;
-  pageParam?: number;
+  isLastSection: boolean;
+  isInfinity: boolean;
 }
 
-// Api
-
-export interface GetStoreApi {
-  category: string;
+export interface InfinityProductListProps {
+  isLastSection: boolean;
+  isInfinity: boolean;
+  filteredBrands: string[];
   limit: number;
-}
-
-export interface GetStoreAllListApi {
-  limit: number;
-  pageParam: number;
 }
 
 export interface CategoryListProps {
+  isLastSection: boolean;
   index: number;
-  limit: boolean;
   item: Product;
 }
