@@ -1,16 +1,25 @@
 import Layout from '../../components/common/Layouts/Layout';
 import MainBanner from './MainBanner';
 import MainProductShowcase from './MainProductShowcase';
-import ProductList from '../../components/common/Card/ProductList';
 import MainPromo from './MainPromo';
+import HomeProductList from '../../components/common/Card/HomeProductList';
+
+const HOME_QUERY_MAX_LENGTH = [8, 4];
 
 function Home() {
   return (
     <Layout>
       <MainBanner />
       <MainProductShowcase />
-      <ProductList category="mobile-accessories" limit={8} />
-      <ProductList category="mobile-accessories" limit={4} />
+      {HOME_QUERY_MAX_LENGTH.map((product, index) => (
+        <HomeProductList
+          key={product}
+          category="mobile-accessories"
+          limit={product}
+          isInfinity={false}
+          isLastSection={index === HOME_QUERY_MAX_LENGTH.length - 1}
+        />
+      ))}
       <MainPromo />
     </Layout>
   );
