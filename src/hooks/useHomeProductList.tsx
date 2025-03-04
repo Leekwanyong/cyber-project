@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/card';
 import { getStoreApi } from '../api/getStoreApi';
 
-function UseHomeProductList(category: string, limit: number, isInfinity: boolean) {
+function useHomeProductList(category: string, limit: number, isInfinity: boolean) {
   const homeQuery = useQuery<Product[]>({
     queryKey: ['HomeProductQuery', category, limit],
     queryFn: async () => getStoreApi({ category, limit }),
@@ -14,4 +14,4 @@ function UseHomeProductList(category: string, limit: number, isInfinity: boolean
   };
 }
 
-export default UseHomeProductList;
+export default useHomeProductList;

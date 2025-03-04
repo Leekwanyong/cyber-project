@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Product } from '../types/card';
 
-function UseFilterProduct(product: Product[], filteredBrands: string[]) {
+function useFilterProduct(product: Product[], filteredBrands: string[]) {
   const [sortBy, setSortBy] = useState<string>('asc');
 
   const filteredProducts = useMemo(
@@ -23,4 +23,4 @@ function UseFilterProduct(product: Product[], filteredBrands: string[]) {
   return { setSortBy, sortOrderData };
 }
 
-export default UseFilterProduct;
+export default useFilterProduct;
