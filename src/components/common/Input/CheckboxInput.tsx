@@ -1,8 +1,8 @@
-type Checkbox = Record<string, { id: number; name: string; checked: boolean; brand: string }[]>;
+import { FilterOptions } from '../../../types/card';
 
 interface CheckboxInputProps {
   categories: string;
-  data: Checkbox;
+  data: FilterOptions;
   onChange: (id: number, key: string) => void;
 }
 

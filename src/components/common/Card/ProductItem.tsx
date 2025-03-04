@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import { useDispatch } from 'react-redux';
+import { css } from '@emotion/react';
 import { CategoryListProps } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
@@ -71,7 +71,7 @@ const HiddenWrapper = styled.div`
 
 const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
-function ProductItem({ item, index, limit }: CategoryListProps) {
+function ProductItem({ item, index, isLastSection }: CategoryListProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleOnToggleClick = () => {
@@ -81,7 +81,10 @@ function ProductItem({ item, index, limit }: CategoryListProps) {
   return (
     <ProductItemWrapper
       css={css`
-        background-color: ${limit ? '#F6F6F6' : background[index]};
+        ${isLastSection &&
+        `
+      background-color: ${background[index]};
+    `}
       `}
     >
       <ProductIconWrapper onClick={handleOnToggleClick}>
@@ -93,15 +96,9 @@ function ProductItem({ item, index, limit }: CategoryListProps) {
       <ProductListDescriptionWrapper>
         <Description>{item.description}</Description>
         <ProductPrice>${item.price}</ProductPrice>
-        {limit ? (
-          <Button size="primary" color="primary">
-            Buy Now
-          </Button>
-        ) : (
-          <Button size="primary" color={index === 3 ? 'mediumWhite' : 'mediumBlack'}>
-            Buy Now
-          </Button>
-        )}
+        <Button size="primary" color="primary">
+          Buy Now
+        </Button>
       </ProductListDescriptionWrapper>
       <HiddenWrapper>
         <StoredWishlist />
