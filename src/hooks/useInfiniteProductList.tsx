@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getStoreAllListApi } from '../api/getStoreApi';
 
-const UseInfiniteProductList = (isInfinity: boolean, limit: number) => {
+const useInfiniteProductList = (isInfinity: boolean, limit: number) => {
   const infiniteQuery = useInfiniteQuery({
     queryKey: ['infinity'],
     queryFn: ({ pageParam = 0 }) => getStoreAllListApi({ limit, pageParam }),
@@ -20,4 +20,4 @@ const UseInfiniteProductList = (isInfinity: boolean, limit: number) => {
   };
 };
 
-export default UseInfiniteProductList;
+export default useInfiniteProductList;
