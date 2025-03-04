@@ -16,7 +16,7 @@ function InfinityProductList({
 }: InfinityProductListProps) {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProductList(isInfinity, limit);
-  const observer = useIntersectionObserver(hasNextPage, fetchNextPage);
+  const observerRef = useIntersectionObserver(hasNextPage, fetchNextPage);
 
   const { sortOrderData, setSortBy } = useFilterProduct(data, filteredBrands);
 
@@ -49,7 +49,7 @@ function InfinityProductList({
               />
             ))}
       </ul>
-      {isInfinity && <div ref={observer} />}
+      {isInfinity && <div ref={observerRef} />}
     </div>
   );
 }
