@@ -8,8 +8,26 @@ import Button from '../../components/common/Button/Button';
 const Wrapper = styled.section`
   display: grid;
   grid-template-areas:
-    'ps5 ps5  macbook  macbook'
+    'ps5 ps5 macbook macbook'
     'max vision macbook macbook';
+  gap: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-template-areas:
+      'ps5 ps5'
+      'macbook macbook'
+      'max vision';
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-areas:
+      'ps5'
+      'macbook'
+      'max'
+      'vision';
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Ps5Wrapper = styled.section`
@@ -18,8 +36,14 @@ const Ps5Wrapper = styled.section`
   align-items: center;
   gap: 0.5rem;
   word-wrap: break-word;
+
   div {
     padding: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
@@ -28,6 +52,11 @@ const Title = styled.h2`
   font-weight: 500;
   line-height: 40px;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    line-height: 32px;
+  }
 `;
 
 const SubTitle = styled.p`
@@ -35,6 +64,11 @@ const SubTitle = styled.p`
   font-weight: 500;
   color: #909090;
   line-height: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
 `;
 
 const MackBookWrapper = styled.section`
@@ -44,8 +78,18 @@ const MackBookWrapper = styled.section`
   align-items: center;
   justify-content: space-between;
   word-wrap: break-word;
+
   div {
     padding: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      order: -1; /* 이미지 위로 */
+    }
   }
 `;
 
@@ -53,8 +97,14 @@ const MackBookTitle = styled.h2`
   font-size: 64px;
   font-weight: 100;
   line-height: 56px;
+
   span {
     font-weight: 100;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+    line-height: 42px;
   }
 `;
 
@@ -64,6 +114,11 @@ const MackBookSubTitle = styled.p`
   line-height: 24px;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
 `;
 
 const AirPodsWrapper = styled.section`
@@ -73,20 +128,36 @@ const AirPodsWrapper = styled.section`
   align-items: center;
   justify-content: space-between;
   word-wrap: break-word;
+
   div {
     padding: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
 const AirPodsTitle = styled.h2`
   font-size: 29px;
   line-height: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 36px;
+  }
 `;
 
 const AirPodsSubTitle = styled.p`
   line-height: 24px;
   color: #909090;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
 `;
 
 const VisionWrapper = styled.section`
@@ -96,8 +167,14 @@ const VisionWrapper = styled.section`
   align-items: center;
   justify-content: space-between;
   word-wrap: break-word;
+
   div {
     padding: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
@@ -105,19 +182,40 @@ const VisionTitle = styled.h2`
   font-size: 29px;
   line-height: 40px;
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 36px;
+  }
 `;
 
 const VisionSubTitle = styled.p`
   color: #909090;
   font-size: 14px;
   line-height: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
+`;
+
+const StyledImage = styled.img`
+  max-width: 100%;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 200px;
+    margin-top: 1rem;
+    object-fit: contain;
 `;
 
 function MainProductShowcase() {
   return (
     <Wrapper>
       <Ps5Wrapper>
-        <img src={Ps5} alt="Playstation 5" />
+        <StyledImage src={Ps5} alt="Playstation 5" />
         <div>
           <Title>Playstation 5</Title>
           <SubTitle>
@@ -140,10 +238,10 @@ function MainProductShowcase() {
             Shop Now
           </Button>
         </div>
-        <img src={MacBook} alt="Macbook Air" />
+        <StyledImage src={MacBook} alt="Macbook Air" />
       </MackBookWrapper>
       <AirPodsWrapper>
-        <img src={AirPodMax} alt="Apple AirPods Max" />
+        <StyledImage src={AirPodMax} alt="Apple AirPods Max" />
         <div>
           <AirPodsTitle>
             Apple <br /> AirPods <br /> Max
@@ -154,7 +252,7 @@ function MainProductShowcase() {
         </div>
       </AirPodsWrapper>
       <VisionWrapper>
-        <img src={VisionPro} alt="Apple Vision Pro" />
+        <StyledImage src={VisionPro} alt="Apple Vision Pro" />
         <div>
           <VisionTitle>
             Apple <br /> Vision Pro
