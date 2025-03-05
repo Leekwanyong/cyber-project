@@ -18,6 +18,7 @@ const StyledTextInput = styled.input<TextInputProps>`
   border-radius: 8px;
   background-color: #f5f5f5;
   color: #696969;
+  padding-left: 1rem;
 
   ${({ sizeType }) =>
     sizeType === 'medium' &&
