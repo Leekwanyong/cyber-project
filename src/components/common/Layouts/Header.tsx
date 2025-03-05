@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
@@ -10,7 +10,10 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: space-around;
   position: fixed;
+  max-width: 1440px;
   width: 100%;
+  padding: 8px 12px;
+  top: 0;
   background-color: white;
 
   @media (max-width: 768px) {
@@ -26,7 +29,6 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  position: relative;
   svg:hover {
     cursor: pointer;
   }
@@ -43,7 +45,7 @@ const IconWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    display: block;
   }
 `;
 
@@ -62,7 +64,6 @@ const MobileMenuWrapper = styled.div`
   display: none;
   position: fixed;
   text-align: center;
-  top: 70px;
   left: 0;
   z-index: 999;
   width: 100%;
@@ -116,10 +117,13 @@ function Header() {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  console.log(debounce);
+
   const handleOnToggle = () => {
     setMenuOpen((prev) => !prev);
   };
+
+  useEffect(() => {}, [debounce]);
+
   return (
     <HeaderWrapper>
       <div style={{ height: '100%' }}>
@@ -150,6 +154,11 @@ function Header() {
             Product
           </Link>
         </div>
+        <IconWrapper>
+          <button type="button" onClick={() => navigate('/wishlist')}>
+            <HeartIcon width="26px" height="26px" />
+          </button>
+        </IconWrapper>
       </MobileMenuWrapper>
     </HeaderWrapper>
   );
