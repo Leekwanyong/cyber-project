@@ -6,7 +6,7 @@ function useHomeProductList(category: string, limit: number, isInfinity: boolean
   const homeQuery = useQuery<Product[]>({
     queryKey: ['HomeProductQuery', category, limit],
     queryFn: async () => getStoreApi({ category, limit }),
-    enabled: !isInfinity && limit <= 8,
+    enabled: !isInfinity,
   });
   return {
     isLoading: homeQuery.isLoading,
