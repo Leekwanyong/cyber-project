@@ -13,6 +13,7 @@ const HeaderWrapper = styled.header`
   max-width: 1440px;
   width: 100%;
   padding: 8px 12px;
+  z-index: 1000;
   top: 0;
   background-color: white;
 
@@ -60,12 +61,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const MobileMenuWrapper = styled.div`
-  display: none;
+const MobileMenuWrapper = styled.div<{ menuOpen: boolean }>`
   position: fixed;
   text-align: center;
   left: 0;
-  z-index: 999;
+  top: 60px; /* 헤더 높이에 맞춰서 변경 */
+  z-index: 1005;
   width: 100%;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -73,44 +74,51 @@ const MobileMenuWrapper = styled.div`
     max-height 0.3s ease-in-out,
     opacity 0.3s ease-in-out,
     transform 0.3s ease-in-out;
-  transform: scaleY(0);
   transform-origin: top;
+  max-height: ${({ menuOpen }) => (menuOpen ? '300px' : '0')};
+  display: ${({ menuOpen }) => (menuOpen ? 'flex' : 'none')};
 
   div {
-    border-top: 1px solid black;
-    padding: 0.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid black;
   }
 
-  ${({ menuOpen }: { menuOpen: boolean }) =>
-    menuOpen &&
-    `
-    max-height: 300px;
-    opacity: 1;
-    transform: scaleY(1);
-  `};
+  div > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    svg:hover {
+      fill: hotpink;
+      transition: fill 0.2s ease-in-out;
+    }
+  }
+
   @media (max-width: 768px) {
-    display: block;
+    display: ${({ menuOpen }) => (menuOpen ? 'flex' : 'none')};
+    flex-direction: column;
   }
 `;
 
 const HamburgerButton = styled.button`
-  display: none;
+  display: flex;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  z-index: 1001;
 
-  @media (max-width: 768px) {
-    display: flex;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 2rem;
-    align-items: center;
-    justify-content: right;
-    margin-right: 1rem;
+  @media (min-width: 769px) {
+    display: none;
   }
 `;
 
 function Header() {
   const [value, setValue] = useState<string>('');
-  const [menuOpen, setMenuOpen] = useState<boolean>(true);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const debounce = useDebounce(value, 500);
   const navigate = useNavigate();
 
@@ -126,8 +134,10 @@ function Header() {
 
   return (
     <HeaderWrapper>
-      <div style={{ height: '100%' }}>
-        <h2>Cyber</h2>
+      <div>
+        <Link to="/">
+          <h2>Cyber</h2>
+        </Link>
       </div>
       <Wrapper>
         <div>
@@ -154,11 +164,11 @@ function Header() {
             Product
           </Link>
         </div>
-        <IconWrapper>
+        <div>
           <button type="button" onClick={() => navigate('/wishlist')}>
             <HeartIcon width="26px" height="26px" />
           </button>
-        </IconWrapper>
+        </div>
       </MobileMenuWrapper>
     </HeaderWrapper>
   );
