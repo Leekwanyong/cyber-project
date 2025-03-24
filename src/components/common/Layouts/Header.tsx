@@ -1,6 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
+import { css } from '@emotion/react';
 import TextInput from '../Input/TextInput';
 import { CartIcon, Hamburger, HeartIcon, UserIcon } from '../Icon/index';
 import useDebounce from '../../../hooks/useDebounce';
@@ -65,7 +67,7 @@ const MobileMenuWrapper = styled.div<{ menuOpen: boolean }>`
   position: fixed;
   text-align: center;
   left: 0;
-  top: 60px; /* 헤더 높이에 맞춰서 변경 */
+  top: 60px;
   z-index: 1005;
   width: 100%;
   background: white;
@@ -135,7 +137,13 @@ function Header() {
   return (
     <HeaderWrapper>
       <div>
-        <Link to="/">
+        <Link
+          to="/"
+          css={css`
+            text-decoration: none;
+            color: black;
+          `}
+        >
           <h2>Cyber</h2>
         </Link>
       </div>
@@ -143,9 +151,16 @@ function Header() {
         <div>
           <TextInput sizeType="primary" value={value} onChange={handleOnChange} />
         </div>
-
         <div>
-          <Link to="/product">Product</Link>
+          <Link
+            to="/product"
+            css={css`
+              text-decoration: none;
+              color: black;
+            `}
+          >
+            Product
+          </Link>
         </div>
         <IconWrapper>
           <button type="button" onClick={() => navigate('/wishlist')}>
@@ -160,7 +175,14 @@ function Header() {
       </HamburgerButton>
       <MobileMenuWrapper menuOpen={menuOpen}>
         <div>
-          <Link to="/product" onClick={handleOnToggle}>
+          <Link
+            to="/product"
+            onClick={handleOnToggle}
+            css={css`
+              text-decoration: none;
+              color: black;
+            `}
+          >
             Product
           </Link>
         </div>
