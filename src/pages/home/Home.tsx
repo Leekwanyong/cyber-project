@@ -16,7 +16,6 @@ function Home() {
           key={product}
           category="mobile-accessories"
           limit={product}
-          isInfinity={false}
           isLastSection={index === HOME_QUERY_MAX_LENGTH.length - 1}
         />
       ))}
