@@ -4,6 +4,8 @@ import MacBook from '../../assets/MacBookPro.png';
 import AirPodMax from '../../assets/AirPodsMax.png';
 import VisionPro from '../../assets/VIsionPro.png';
 import Button from '../../components/common/Button/Button';
+import imageFallbackHandler from '../../utils/image';
+import DefaultImg from '../../assets/defaultImg.png';
 
 const Wrapper = styled.section`
   display: grid;
@@ -215,7 +217,11 @@ function MainProductShowcase() {
   return (
     <Wrapper>
       <Ps5Wrapper>
-        <StyledImage src={Ps5} alt="Playstation 5" />
+        <StyledImage
+          src={Ps5}
+          alt="Playstation 5"
+          onError={imageFallbackHandler(DefaultImg, Ps5)}
+        />
         <div>
           <Title>Playstation 5</Title>
           <SubTitle>
@@ -238,10 +244,18 @@ function MainProductShowcase() {
             Shop Now
           </Button>
         </div>
-        <StyledImage src={MacBook} alt="Macbook Air" />
+        <StyledImage
+          src={MacBook}
+          alt="Macbook Air"
+          onError={imageFallbackHandler(DefaultImg, MacBook)}
+        />
       </MackBookWrapper>
       <AirPodsWrapper>
-        <StyledImage src={AirPodMax} alt="Apple AirPods Max" />
+        <StyledImage
+          src={AirPodMax}
+          alt="Apple AirPods Max"
+          onError={imageFallbackHandler(DefaultImg, AirPodMax)}
+        />
         <div>
           <AirPodsTitle>
             Apple <br /> AirPods <br /> Max
@@ -252,7 +266,11 @@ function MainProductShowcase() {
         </div>
       </AirPodsWrapper>
       <VisionWrapper>
-        <StyledImage src={VisionPro} alt="Apple Vision Pro" />
+        <StyledImage
+          src={VisionPro}
+          alt="Apple Vision Pro"
+          onError={imageFallbackHandler(DefaultImg, VisionPro)}
+        />
         <div>
           <VisionTitle>
             Apple <br /> Vision Pro
