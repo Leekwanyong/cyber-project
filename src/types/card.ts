@@ -16,17 +16,16 @@ export interface HomeProductQuery {
   category: ProductListCategory;
   limit: number;
   isLastSection: boolean;
-  isInfinity: boolean;
 }
 
 export interface InfinityProductListProps {
   isLastSection: boolean;
-  isInfinity: boolean;
   filteredBrands: string[];
   limit: number;
 }
 
 export interface CategoryListProps {
+  isInFirstViewport: boolean;
   isLastSection: boolean;
   index: number;
   item: Product;
