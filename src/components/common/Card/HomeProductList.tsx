@@ -14,8 +14,8 @@ const WrapperUl = styled.ul`
   padding: 0;
 `;
 
-function HomeProductList({ category, limit, isInfinity, isLastSection }: HomeProductQuery) {
-  const { isLoading, data } = useHomeProductList(category, limit, isInfinity);
+function HomeProductList({ category, limit, isLastSection }: HomeProductQuery) {
+  const { isLoading, data } = useHomeProductList(category, limit);
 
   return (
     <WrapperUl style={{ display: 'flex' }}>
@@ -27,6 +27,7 @@ function HomeProductList({ category, limit, isInfinity, isLastSection }: HomePro
               index={index}
               item={product}
               isLastSection={isLastSection}
+              isInFirstViewport
             />
           ))}
     </WrapperUl>

@@ -2,11 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { Product } from '../types/card';
 import { getStoreApi } from '../api/getStoreApi';
 
-function useHomeProductList(category: string, limit: number, isInfinity: boolean) {
+function useHomeProductList(category: string, limit: number) {
   const homeQuery = useQuery<Product[]>({
     queryKey: ['HomeProductQuery', category, limit],
     queryFn: async () => getStoreApi({ category, limit }),
-    enabled: !isInfinity,
   });
   return {
     isLoading: homeQuery.isLoading,

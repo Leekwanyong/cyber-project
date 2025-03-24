@@ -8,6 +8,8 @@ import Button from '../Button/Button';
 import StoredWishlist from '../Cart/StoredWishlist';
 import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
+import imageFallbackHandler from '../../../utils/image';
+import DefaultImg from '../../../assets/defaultImg.png';
 
 const ProductItemWrapper = styled.li`
   width: calc(24%);
@@ -71,7 +73,7 @@ const HiddenWrapper = styled.div`
 
 const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
-function ProductItem({ item, index, isLastSection }: CategoryListProps) {
+function ProductItem({ item, index, isLastSection, isInFirstViewport }: CategoryListProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleOnToggleClick = () => {
@@ -91,7 +93,12 @@ function ProductItem({ item, index, isLastSection }: CategoryListProps) {
         <HeartIcon />
       </ProductIconWrapper>
       <div>
-        <ProductImg src={item.thumbnail} alt={item.title} />
+        <ProductImg
+          src={item.thumbnail}
+          alt={item.title}
+          onError={imageFallbackHandler(DefaultImg, item.thumbnail)}
+          loading={isInFirstViewport ? 'eager' : 'lazy'}
+        />
       </div>
       <ProductListDescriptionWrapper>
         <Description>{item.description}</Description>

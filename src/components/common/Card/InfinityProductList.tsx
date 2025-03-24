@@ -8,20 +8,15 @@ import Skeleton from './Skeleton';
 import ProductItem from './ProductItem';
 import useInfiniteProductList from '../../../hooks/useInfiniteProductList';
 
-function InfinityProductList({
-  isInfinity,
-  limit,
-  filteredBrands,
-  isLastSection,
-}: InfinityProductListProps) {
+function InfinityProductList({ limit, filteredBrands, isLastSection }: InfinityProductListProps) {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteProductList(isInfinity, limit);
+    useInfiniteProductList(limit);
   const observerRef = useIntersectionObserver(hasNextPage, fetchNextPage);
 
   const { sortOrderData, setSortBy } = useFilterProduct(data, filteredBrands);
 
   return (
-    <div>
+    <div style={{ marginTop: '3rem' }}>
       <div>
         <button type="button" onClick={() => setSortBy('desc')}>
           가격 높은 순
@@ -46,10 +41,12 @@ function InfinityProductList({
                 index={index}
                 item={order}
                 isLastSection={isLastSection}
+                isInFirstViewport
               />
             ))}
       </ul>
-      {isInfinity && <div ref={observerRef} />}
+
+      {hasNextPage && <div ref={observerRef} style={{ marginTop: '15%' }} />}
     </div>
   );
 }
