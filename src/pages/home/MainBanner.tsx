@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import Iphone from '../../assets/Iphone.png';
 import Button from '../../components/common/Button/Button';
+import DefaultImg from '../../assets/defaultImg.png';
+import imageFallbackHandler from '../../utils/image';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -65,7 +67,7 @@ const MainTextTitle = styled.p`
   }
 
   @media (max-width: 768px) {
-    font-size: clamp(28px, 5vw, 60px); /* 모바일에서 조금 줄이기 */
+    font-size: clamp(28px, 5vw, 60px);
   }
 `;
 
@@ -104,7 +106,11 @@ function MainBanner() {
               </Button>
             </div>
           </MainTextContainer>
-          <StyledImage src={Iphone} alt="iphone" />
+          <StyledImage
+            src={Iphone}
+            alt="Iphone"
+            onError={imageFallbackHandler(DefaultImg, Iphone)}
+          />
         </MainBannerContainer>
       </MainWrapper>
     </section>
