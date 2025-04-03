@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-
-const Font = css`
+const Font = `
     @font-face {
         font-family: NotoSans;
         font-style: normal;

@@ -12,7 +12,7 @@ const useIntersectionObserver = (hasNextPage: boolean, fetchNextPage: () => void
           }
         });
       },
-      { threshold: 0 }
+      { threshold: 0.5 }
     );
   }, [hasNextPage, fetchNextPage]);
 

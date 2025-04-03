@@ -1,7 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
-import styled from '@emotion/styled';
 import CheckboxInput from '../../components/common/Input/CheckboxInput';
 import { LABEL_MENU } from '../../constants/aside';
 import { FilterOptions } from '../../types/card';
@@ -10,24 +7,6 @@ interface Props {
   asideData: FilterOptions;
   setAsideData: Dispatch<SetStateAction<FilterOptions>>;
 }
-
-const AsideWrapper = styled.aside`
-  width: 250px;
-  border-right: 1px solid #ddd;
-  height: 1000vh;
-  padding-right: 2rem;
-`;
-
-const AsideButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  width: 100%;
-`;
 
 function Aside({ asideData, setAsideData }: Props) {
   const [toggle, setToggle] = useState<Record<string, boolean>>({});
@@ -54,18 +33,14 @@ function Aside({ asideData, setAsideData }: Props) {
   };
 
   return (
-    <div
-      css={css`
-        display: flex;
-      `}
-    >
-      <AsideWrapper>
+    <div>
+      <aside>
         {LABEL_MENU.map((item) => (
           <ul key={item}>
-            <AsideButton type="button" onClick={() => handleOnToggle(item)}>
+            <button type="button" onClick={() => handleOnToggle(item)}>
               <p>{item}</p>
               <p>{toggle[item] ? '▼' : '▲'}</p>
-            </AsideButton>
+            </button>
             <li>
               {toggle[item] &&
                 Object.keys(asideData).map((key) => {
@@ -82,7 +57,7 @@ function Aside({ asideData, setAsideData }: Props) {
             </li>
           </ul>
         ))}
-      </AsideWrapper>
+      </aside>
     </div>
   );
 }

@@ -1,6 +1,4 @@
-/** @jsxImportSource @emotion/react */
 import { v4 as uuidv4 } from 'uuid';
-import { css } from '@emotion/react';
 import { InfinityProductListProps } from '../../../types/card';
 import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 import useFilterProduct from '../../../hooks/useFilterProduct';
@@ -16,7 +14,7 @@ function InfinityProductList({ limit, filteredBrands, isLastSection }: InfinityP
   const { sortOrderData, setSortBy } = useFilterProduct(data, filteredBrands);
 
   return (
-    <div style={{ marginTop: '3rem' }}>
+    <div>
       <div>
         <button type="button" onClick={() => setSortBy('desc')}>
           가격 높은 순
@@ -25,14 +23,7 @@ function InfinityProductList({ limit, filteredBrands, isLastSection }: InfinityP
           가격 낮은 순
         </button>
       </div>
-      <ul
-        css={css`
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: space-between;
-        `}
-      >
+      <ul>
         {isFetchingNextPage && isLoading
           ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
           : sortOrderData.map((order, index) => (

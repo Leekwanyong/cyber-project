@@ -1,6 +1,4 @@
-/** @jsxImportSource @emotion/react */
 import { useMemo, useState } from 'react';
-import { css } from '@emotion/react';
 import Layout from '../../components/common/Layouts/Layout';
 import Aside from './Aside';
 import { ASIDE_DATA } from '../../constants/aside';
@@ -21,24 +19,11 @@ function Product() {
 
   return (
     <Layout>
-      <div
-        css={css`
-          display: flex;
-          align-items: flex-start;
-          width: 100%;
-          margin-top: 2rem;
-        `}
-      >
+      <div>
         <Aside asideData={asideData} setAsideData={setAsideData} />
 
-        <div
-          css={css`
-            flex: 1;
-            min-width: 0;
-          `}
-        >
+        <div>
           <InfinityProductList
-            isInfinity
             filteredBrands={filteredBrands}
             limit={MAX_LIMIT}
             isLastSection={false}

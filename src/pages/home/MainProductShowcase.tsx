@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import Ps5 from '../../assets/PlayStation.png';
 import MacBook from '../../assets/MacBookPro.png';
 import AirPodMax from '../../assets/AirPodsMax.png';
@@ -7,280 +6,93 @@ import Button from '../../components/common/Button/Button';
 import imageFallbackHandler from '../../utils/image';
 import DefaultImg from '../../assets/defaultImg.png';
 
-const Wrapper = styled.section`
-  display: grid;
-  grid-template-areas:
-    'ps5 ps5 macbook macbook'
-    'max vision macbook macbook';
-  gap: 1rem;
-
-  @media (max-width: 1024px) {
-    grid-template-areas:
-      'ps5 ps5'
-      'macbook macbook'
-      'max vision';
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-areas:
-      'ps5'
-      'macbook'
-      'max'
-      'vision';
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Ps5Wrapper = styled.section`
-  grid-area: ps5;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  word-wrap: break-word;
-
-  div {
-    padding: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 49px;
-  font-weight: 500;
-  line-height: 40px;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 36px;
-    line-height: 32px;
-  }
-`;
-
-const SubTitle = styled.p`
-  font-size: 14px;
-  font-weight: 500;
-  color: #909090;
-  line-height: 24px;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 20px;
-  }
-`;
-
-const MackBookWrapper = styled.section`
-  grid-area: macbook;
-  background-color: #ededed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  word-wrap: break-word;
-
-  div {
-    padding: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-
-    img {
-      order: -1; /* 이미지 위로 */
-    }
-  }
-`;
-
-const MackBookTitle = styled.h2`
-  font-size: 64px;
-  font-weight: 100;
-  line-height: 56px;
-
-  span {
-    font-weight: 100;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 48px;
-    line-height: 42px;
-  }
-`;
-
-const MackBookSubTitle = styled.p`
-  color: #909090;
-  font-size: 14px;
-  line-height: 24px;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 20px;
-  }
-`;
-
-const AirPodsWrapper = styled.section`
-  grid-area: max;
-  background-color: #ededed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  word-wrap: break-word;
-
-  div {
-    padding: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const AirPodsTitle = styled.h2`
-  font-size: 29px;
-  line-height: 40px;
-
-  @media (max-width: 768px) {
-    font-size: 24px;
-    line-height: 36px;
-  }
-`;
-
-const AirPodsSubTitle = styled.p`
-  line-height: 24px;
-  color: #909090;
-  font-size: 14px;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 20px;
-  }
-`;
-
-const VisionWrapper = styled.section`
-  grid-area: vision;
-  background-color: #353535;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  word-wrap: break-word;
-
-  div {
-    padding: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const VisionTitle = styled.h2`
-  font-size: 29px;
-  line-height: 40px;
-  color: white;
-
-  @media (max-width: 768px) {
-    font-size: 24px;
-    line-height: 36px;
-  }
-`;
-
-const VisionSubTitle = styled.p`
-  color: #909090;
-  font-size: 14px;
-  line-height: 24px;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 20px;
-  }
-`;
-
-const StyledImage = styled.img`
-  max-width: 100%;
-  object-fit: cover;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 200px;
-    margin-top: 1rem;
-    object-fit: contain;
-`;
-
 function MainProductShowcase() {
   return (
-    <Wrapper>
-      <Ps5Wrapper>
-        <StyledImage
+    <section className="grid gap-4 grid-cols-4 grid-rows-2 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1">
+      <div
+        className="col-span-2 row-span-1 flex flex-col sm:flex-row items-center gap-4 p-4"
+        style={{ gridArea: 'ps5' }}
+      >
+        <img
           src={Ps5}
           alt="Playstation 5"
           onError={imageFallbackHandler(DefaultImg, Ps5)}
+          className="w-full sm:w-1/2 object-contain"
         />
         <div>
-          <Title>Playstation 5</Title>
-          <SubTitle>
+          <h2 className="text-3xl sm:text-5xl font-medium leading-tight mb-2">Playstation 5</h2>
+          <p className="text-sm sm:text-base text-gray-500 leading-6">
             Incredibly powerful CPUs, GPUs, and an SSD with <br />
             integrated I/O will redefine your PlayStation <br />
             experience
-          </SubTitle>
+          </p>
         </div>
-      </Ps5Wrapper>
-      <MackBookWrapper>
-        <div>
-          <MackBookTitle>
-            Macbook <span>Air</span>
-          </MackBookTitle>
-          <MackBookSubTitle>
+      </div>
+
+      <div
+        className="col-span-2 row-span-2 flex flex-col sm:flex-row justify-between items-center bg-gray-200 p-8"
+        style={{ gridArea: 'macbook' }}
+      >
+        <div className="text-center sm:text-left">
+          <h2 className="text-4xl sm:text-6xl font-thin leading-tight">
+            Macbook <span className="font-thin">Air</span>
+          </h2>
+          <p className="text-sm text-gray-500 my-2">
             The new 15-inch MacBook Air makes room for more of what you love with a spacious Liquid
             Retina display.
-          </MackBookSubTitle>
+          </p>
           <Button size="medium" color="mediumBlack">
             Shop Now
           </Button>
         </div>
-        <StyledImage
+        <img
           src={MacBook}
           alt="Macbook Air"
           onError={imageFallbackHandler(DefaultImg, MacBook)}
+          className="w-full sm:w-1/2 object-contain"
         />
-      </MackBookWrapper>
-      <AirPodsWrapper>
-        <StyledImage
+      </div>
+
+      <div
+        className="flex flex-col sm:flex-row justify-between items-center bg-gray-200 p-8"
+        style={{ gridArea: 'max' }}
+      >
+        <img
           src={AirPodMax}
           alt="Apple AirPods Max"
           onError={imageFallbackHandler(DefaultImg, AirPodMax)}
+          className="w-full sm:w-1/2 object-contain"
         />
-        <div>
-          <AirPodsTitle>
+        <div className="text-center sm:text-left">
+          <h2 className="text-2xl sm:text-3xl leading-tight">
             Apple <br /> AirPods <br /> Max
-          </AirPodsTitle>
-          <AirPodsSubTitle>
+          </h2>
+          <p className="text-sm text-gray-500 leading-6">
             Computational audio. <br /> Listen, powerful.
-          </AirPodsSubTitle>
+          </p>
         </div>
-      </AirPodsWrapper>
-      <VisionWrapper>
-        <StyledImage
+      </div>
+
+      <div
+        className="flex flex-col sm:flex-row justify-between items-center bg-neutral-800 p-8"
+        style={{ gridArea: 'vision' }}
+      >
+        <img
           src={VisionPro}
           alt="Apple Vision Pro"
           onError={imageFallbackHandler(DefaultImg, VisionPro)}
+          className="w-full sm:w-1/2 object-contain"
         />
-        <div>
-          <VisionTitle>
+        <div className="text-white text-center sm:text-left">
+          <h2 className="text-2xl sm:text-3xl leading-tight">
             Apple <br /> Vision Pro
-          </VisionTitle>
-          <VisionSubTitle>
+          </h2>
+          <p className="text-sm text-gray-400 leading-6">
             An immersive way to <br /> experience <br /> entertainment.
-          </VisionSubTitle>
+          </p>
         </div>
-      </VisionWrapper>
-    </Wrapper>
+      </div>
+    </section>
   );
 }
 

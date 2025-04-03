@@ -1,67 +1,31 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-type ButtonSize = 'primary' | 'medium' | 'mobileSmail' | 'mobileLarge';
-type ButtonColor = 'primary' | 'mediumBlack' | 'mediumWhite';
-
-interface ButtonType {
+interface ButtonProps {
   children: React.ReactNode;
-  size: ButtonSize;
-  color: ButtonColor;
+  size: 'primary' | 'medium' | 'mobileSmail' | 'mobileLarge';
+  color: 'primary' | 'mediumBlack' | 'mediumWhite';
 }
 
-const StyledButton = styled.button<ButtonType>`
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  background-color: black;
-  cursor: pointer;
-  width: 188px;
-  height: 48px;
-  color: white;
-  padding: 8px;
+function Button({ children, size = 'primary', color = 'primary' }: ButtonProps) {
+  const baseStyle = 'rounded-md font-semibold outline-none border';
+  const sizeStyle = {
+    primary: 'w-[188px] h-12',
+    medium: 'w-[191px] h-14',
+    mobileSmail: 'w-[140px] h-10',
+    mobileLarge: 'w-[343px] h-14',
+  }[size];
 
-  //  버튼 사이즈
-  ${({ size }) =>
-    size === 'medium' &&
-    css`
-      width: 191px;
-      height: 56px;
-    `}
-  ${({ size }) =>
-    size === 'mobileSmail' &&
-    css`
-      width: 140px;
-      height: 40px;
-    `}
-  ${({ size }) =>
-    size === 'mobileLarge' &&
-    css`
-      width: 343px;
-      height: 56px;
-    `} 
-    // 버튼 크기
-  ${({ color }) =>
-    color === 'mediumBlack' &&
-    css`
-      background-color: transparent;
-      border: 1px solid black;
-      color: black;
-    `}
-  ${({ color }) =>
-    color === 'mediumWhite' &&
-    css`
-      background-color: transparent;
-      border: 1px solid white;
-    `}
-`;
+  const colorStyle = {
+    primary: 'bg-black text-white border-none',
+    mediumBlack: 'bg-transparent text-black border-black border',
+    mediumWhite: 'bg-transparent text-white border-white border',
+  }[color];
 
-function Button({ children, size = 'primary', color = 'primary' }: ButtonType) {
   return (
-    <StyledButton size={size} color={color}>
+    <button type="button" className={`${baseStyle} ${sizeStyle} ${colorStyle}`}>
       {children}
-    </StyledButton>
+    </button>
   );
 }
+
 export default Button;
