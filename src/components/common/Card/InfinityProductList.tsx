@@ -12,7 +12,7 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
   const observerRef = useIntersectionObserver(hasNextPage, fetchNextPage);
 
   const { sortOrderData, setSortBy } = useFilterProduct(data, filteredBrands);
-  console.log(isLoading);
+
   return (
     <div className="mt-10">
       <div className="flex items-center  gap-4 mb-6">
@@ -33,7 +33,7 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
       </div>
 
       <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {isFetchingNextPage && true
+        {isFetchingNextPage && isLoading
           ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
           : sortOrderData.map((order) => (
               <ProductItem key={order.id} item={order} isInFirstViewport />
