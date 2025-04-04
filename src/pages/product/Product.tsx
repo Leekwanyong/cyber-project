@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import Layout from '../../components/common/Layouts/Layout';
 import Aside from './Aside';
 import { ASIDE_DATA } from '../../constants/aside';
 import InfinityProductList from '../../components/common/Card/InfinityProductList';
@@ -18,19 +17,17 @@ function Product() {
   );
 
   return (
-    <Layout>
-      <div>
-        <Aside asideData={asideData} setAsideData={setAsideData} />
+    <div>
+      <Aside asideData={asideData} setAsideData={setAsideData} />
 
-        <div>
-          <InfinityProductList
-            filteredBrands={filteredBrands}
-            limit={MAX_LIMIT}
-            isLastSection={false}
-          />
-        </div>
+      <div>
+        <InfinityProductList
+          filteredBrands={filteredBrands}
+          limit={MAX_LIMIT}
+          isLastSection={false}
+        />
       </div>
-    </Layout>
+    </div>
   );
 }
 

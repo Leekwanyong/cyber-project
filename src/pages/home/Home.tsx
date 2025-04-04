@@ -1,4 +1,3 @@
-import Layout from '../../components/common/Layouts/Layout';
 import MainBanner from './MainBanner';
 import MainProductShowcase from './MainProductShowcase';
 import MainPromo from './MainPromo';
@@ -8,7 +7,7 @@ const HOME_QUERY_MAX_LENGTH = [8, 4];
 
 function Home() {
   return (
-    <Layout>
+    <div>
       <MainBanner />
       <MainProductShowcase />
       {HOME_QUERY_MAX_LENGTH.map((product, index) => (
@@ -20,7 +19,7 @@ function Home() {
         />
       ))}
       <MainPromo />
-    </Layout>
+    </div>
   );
 }
 

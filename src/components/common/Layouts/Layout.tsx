@@ -1,16 +1,14 @@
-import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-function Layout({ children }: LayoutProps) {
+function Layout() {
   return (
     <div>
       <Header />
-      <main>{children}</main>
+      <main className="max-w-[1440px] mx-auto">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

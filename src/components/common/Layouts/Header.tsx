@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
-import { CartIcon, Hamburger, HeartIcon, UserIcon } from '../Icon/index';
+import { Hamburger, HeartIcon } from '../Icon/index';
 import useDebounce from '../../../hooks/useDebounce';
 
 function Header() {
@@ -21,38 +21,47 @@ function Header() {
   useEffect(() => {}, [debounce]);
 
   return (
-    <header>
-      <div>
-        <Link to="/">
-          <h2>Cyber</h2>
-        </Link>
-      </div>
-      <div>
+    <header className="fixed w-full bg-white z-50 top-0 h-[64px]">
+      <div className="max-w-[1440px] w-full mx-auto  flex justify-between items-center h-[64px]">
         <div>
-          <TextInput value={value} onChange={handleOnChange} />
+          <Link to="/">
+            <h2 className="text-2xl">Cyber</h2>
+          </Link>
         </div>
-        <div>
-          <Link to="/product">Product</Link>
+        <div className="hidden md:block w-[40%]">
+          <TextInput size="primary" value={value} onChange={handleOnChange} />
         </div>
-        <div>
-          <button type="button" onClick={() => navigate('/wishlist')}>
+
+        <div className="block md:hidden text-2xl mr-6">
+          <button type="button" onClick={handleOnToggle}>
+            {menuOpen ? 'X' : <Hamburger />}
+          </button>
+        </div>
+        <nav className="hidden md:flex items-center gap-4 mr-4">
+          <div>
+            <Link to="/product">Product</Link>
+          </div>
+
+          <button type="button" className="group" onClick={() => navigate('/wishlist')}>
             <HeartIcon />
           </button>
-          <CartIcon />
-          <UserIcon />
-        </div>
+        </nav>
       </div>
-      <button type="button" onClick={handleOnToggle}>
-        {menuOpen ? 'X' : <Hamburger />}
-      </button>
-      <div>
+
+      <div
+        className={`${
+          menuOpen
+            ? 'opacity-100 pointer-events-auto translate-y-0 scale-100 flex flex-col justify-center py-4 font-bold gap-4 items-center fixed top-[64px] left-0 w-full bg-white z-50 transition-all duration-300 ease-in-out sm:hidden'
+            : 'opacity-0 pointer-events-none -translate-y-4 scale-95 sm:hidden'
+        }`}
+      >
         <div>
-          <Link to="/product" onClick={handleOnToggle}>
+          <Link to="/product" onClick={handleOnToggle} className="hover:border-b-2">
             Product
           </Link>
         </div>
         <div>
-          <button type="button" onClick={() => navigate('/wishlist')}>
+          <button type="button" className="group" onClick={() => navigate('/wishlist')}>
             <HeartIcon width="26px" height="26px" />
           </button>
         </div>
