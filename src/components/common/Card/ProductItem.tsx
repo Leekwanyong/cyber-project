@@ -2,13 +2,10 @@ import { useDispatch } from 'react-redux';
 import { CategoryListProps } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
-import StoredWishlist from '../Cart/StoredWishlist';
 import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
 import imageFallbackHandler from '../../../utils/image';
 import DefaultImg from '../../../assets/defaultImg.png';
-
-// const background = ['#fff', '#F9F9F9', '#EAEAEA', '#2C2C2C'];
 
 function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,11 +15,14 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
   };
 
   return (
-    <section>
-      <button type="button" onClick={handleOnToggleClick}>
-        <HeartIcon />
-      </button>
-      <div>
+    <section className="text-center mb-4">
+      <div className="flex items-center justify-end">
+        <button type="button" className="group" onClick={handleOnToggleClick}>
+          <HeartIcon />
+        </button>
+      </div>
+
+      <div className="flex items-center justify-center">
         <img
           src={item.thumbnail}
           alt={item.title}
@@ -30,15 +30,13 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
           loading={isInFirstViewport ? 'eager' : 'lazy'}
         />
       </div>
-      <div>
-        <p>{item.description}</p>
-        <p>${item.price}</p>
+
+      <div className="flex flex-col items-center justify-center gap-2 mt-4">
+        <p className="truncate max-w-[200px] w-full text-center">{item.description}</p>
+        <p className="text-base font-semibold">${item.price}</p>
         <Button size="primary" color="primary">
           Buy Now
         </Button>
-      </div>
-      <div>
-        <StoredWishlist />
       </div>
     </section>
   );

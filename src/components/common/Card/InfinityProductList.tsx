@@ -6,7 +6,7 @@ import Skeleton from './Skeleton';
 import ProductItem from './ProductItem';
 import useInfiniteProductList from '../../../hooks/useInfiniteProductList';
 
-function InfinityProductList({ limit, filteredBrands, isLastSection }: InfinityProductListProps) {
+function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps) {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProductList(limit);
   const observerRef = useIntersectionObserver(hasNextPage, fetchNextPage);
@@ -26,14 +26,8 @@ function InfinityProductList({ limit, filteredBrands, isLastSection }: InfinityP
       <ul>
         {isFetchingNextPage && isLoading
           ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
-          : sortOrderData.map((order, index) => (
-              <ProductItem
-                key={order.id}
-                index={index}
-                item={order}
-                isLastSection={isLastSection}
-                isInFirstViewport
-              />
+          : sortOrderData.map((order) => (
+              <ProductItem key={order.id} item={order} isInFirstViewport />
             ))}
       </ul>
 
