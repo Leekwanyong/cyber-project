@@ -33,17 +33,22 @@ function Aside({ asideData, setAsideData }: Props) {
   };
 
   return (
-    <div>
-      <aside>
-        {LABEL_MENU.map((item) => (
-          <ul key={item}>
-            <button type="button" onClick={() => handleOnToggle(item)}>
-              <p>{item}</p>
-              <p>{toggle[item] ? '▼' : '▲'}</p>
+    <aside className="mt-8 w-full bg-white rounded-xl shadow-md p-4 md:sticky md:top-24 h-fit">
+      {LABEL_MENU.map((item) => (
+        <ul key={item} className="border-b pb-4 mb-4 last:border-none last:pb-0 last:mb-0">
+          <li>
+            <button
+              type="button"
+              onClick={() => handleOnToggle(item)}
+              className="w-full flex justify-between items-center font-semibold text-base text-left hover:text-red-500 transition"
+            >
+              <span>{item}</span>
+              <span className="text-sm text-gray-500">{toggle[item] ? '▼' : '▲'}</span>
             </button>
-            <li>
-              {toggle[item] &&
-                Object.keys(asideData).map((key) => {
+
+            {toggle[item] && (
+              <div className="mt-3 pl-2 flex flex-col gap-2 text-sm text-gray-700">
+                {Object.keys(asideData).map((key) => {
                   const find = asideData[item].find((label) => label.category === key);
                   return (
                     <CheckboxInput
@@ -54,11 +59,12 @@ function Aside({ asideData, setAsideData }: Props) {
                     />
                   );
                 })}
-            </li>
-          </ul>
-        ))}
-      </aside>
-    </div>
+              </div>
+            )}
+          </li>
+        </ul>
+      ))}
+    </aside>
   );
 }
 

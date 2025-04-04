@@ -14,16 +14,25 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
   const { sortOrderData, setSortBy } = useFilterProduct(data, filteredBrands);
 
   return (
-    <div>
-      <div>
-        <button type="button" onClick={() => setSortBy('desc')}>
+    <div className="mt-10">
+      <div className="flex items-center  gap-4 mb-6">
+        <button
+          type="button"
+          onClick={() => setSortBy('desc')}
+          className="px-4 py-2 border rounded hover:bg-gray-100"
+        >
           가격 높은 순
         </button>
-        <button type="button" onClick={() => setSortBy('asc')}>
+        <button
+          type="button"
+          onClick={() => setSortBy('asc')}
+          className="px-4 py-2 border rounded hover:bg-gray-100"
+        >
           가격 낮은 순
         </button>
       </div>
-      <ul>
+
+      <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {isFetchingNextPage && isLoading
           ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
           : sortOrderData.map((order) => (
@@ -31,7 +40,7 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
             ))}
       </ul>
 
-      {hasNextPage && <div ref={observerRef} style={{ marginTop: '15%' }} />}
+      {hasNextPage && <div ref={observerRef} className="mt-10 h-8" />}
     </div>
   );
 }
