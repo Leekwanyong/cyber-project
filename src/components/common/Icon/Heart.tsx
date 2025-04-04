@@ -7,6 +7,7 @@ function Heart({ width = '32', height = '32', color = 'transparent' }: IconProps
       height={height}
       viewBox="0 0 32 32"
       fill={color}
+      className="group-hover:fill-pink-500 duration-300 ease-in-out"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
