@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         pretendard: ['NotoSans', 'sans-serif'],
       },
+      screens: {
+        custom930: '930px',
+      },
     },
   },
   plugins: [],
