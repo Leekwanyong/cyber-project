@@ -3,6 +3,7 @@ import Aside from './Aside';
 import { ASIDE_DATA } from '../../constants/aside';
 import InfinityProductList from '../../components/common/Card/InfinityProductList';
 import { FilterOptions } from '../../types/card';
+import FloatingButton from '../../components/common/Button/FloatingButton';
 
 const MAX_LIMIT = 12;
 function Product() {
@@ -28,6 +29,8 @@ function Product() {
           isLastSection={false}
         />
       </div>
+
+      <FloatingButton />
     </section>
   );
 }

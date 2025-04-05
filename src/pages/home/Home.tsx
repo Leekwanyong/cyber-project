@@ -2,6 +2,7 @@ import MainBanner from './MainBanner';
 import MainProductShowcase from './MainProductShowcase';
 import MainPromo from './MainPromo';
 import HomeProductList from '../../components/common/Card/HomeProductList';
+import FloatingButton from '../../components/common/Button/FloatingButton';
 
 const HOME_QUERY_MAX_LENGTH = [8, 4];
 
@@ -19,6 +20,7 @@ function Home() {
         />
       ))}
       <MainPromo />
+      <FloatingButton />
     </div>
   );
 }
