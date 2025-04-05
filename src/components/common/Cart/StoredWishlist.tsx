@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { removeWishlist } from '../../../redux/slice/wishlistSlice';
+import FloatingButton from '../Button/FloatingButton';
 
 function StoredWishlist() {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,6 +36,8 @@ function StoredWishlist() {
           </div>
         </div>
       ))}
+
+      <FloatingButton />
     </section>
   );
 }
