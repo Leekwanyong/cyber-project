@@ -4,9 +4,10 @@ interface ButtonProps {
   children: React.ReactNode;
   size: 'primary' | 'medium' | 'mobileSmail' | 'mobileLarge';
   color: 'primary' | 'mediumBlack' | 'mediumWhite';
+  onClick?: () => void;
 }
 
-function Button({ children, size = 'primary', color = 'primary' }: ButtonProps) {
+function Button({ children, onClick, size = 'primary', color = 'primary' }: ButtonProps) {
   const baseStyle = 'rounded-md font-semibold outline-none border inline-block';
 
   const sizeStyle = {
@@ -27,7 +28,7 @@ function Button({ children, size = 'primary', color = 'primary' }: ButtonProps) 
   }[color];
 
   return (
-    <button type="button" className={`${baseStyle} ${sizeStyle} ${colorStyle}`}>
+    <button type="button" className={`${baseStyle} ${sizeStyle} ${colorStyle}`} onClick={onClick}>
       {children}
     </button>
   );
