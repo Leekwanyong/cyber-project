@@ -10,6 +10,7 @@ export interface Product {
   thumbnail: string;
   title: string;
   price: number;
+  category?: string;
 }
 
 export interface HomeProductQuery {
@@ -26,7 +27,5 @@ export interface InfinityProductListProps {
 
 export interface CategoryListProps {
   isInFirstViewport: boolean;
-  isLastSection: boolean;
-  index: number;
   item: Product;
 }
