@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { InfinityProductListProps } from '../../../types/card';
 import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 import useFilterProduct from '../../../hooks/useFilterProduct';
@@ -6,6 +5,7 @@ import Skeleton from './Skeleton';
 import ProductItem from './ProductItem';
 import useInfiniteProductList from '../../../hooks/useInfiniteProductList';
 
+const LENGTH = 12;
 function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps) {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProductList(limit);
@@ -34,9 +34,9 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
 
       <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {isFetchingNextPage && isLoading
-          ? Array.from({ length: limit }).map(() => <Skeleton key={uuidv4()} />)
+          ? Array.from({ length: LENGTH }).map((_, i) => <Skeleton key={`infinity-${i}`} />)
           : sortOrderData.map((order) => (
-              <ProductItem key={order.id} item={order} isInFirstViewport />
+              <ProductItem key={order.id} isInFirstViewport={false} item={order} />
             ))}
       </ul>
 
