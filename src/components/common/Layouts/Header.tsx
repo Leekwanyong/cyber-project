@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
 import { Hamburger, HeartIcon } from '../Icon/index';
@@ -7,7 +7,7 @@ import useDebounce from '../../../hooks/useDebounce';
 function Header() {
   const [value, setValue] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const debounce = useDebounce(value, 500);
+  useDebounce(value, 500);
   const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,11 @@ function Header() {
     setMenuOpen((prev) => !prev);
   };
 
-  useEffect(() => {}, [debounce]);
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      navigate(`product?search=${value}`);
+    }
+  };
 
   return (
     <header className="fixed w-full bg-white z-50 top-0 h-[64px]">
@@ -29,7 +33,12 @@ function Header() {
           </Link>
         </div>
         <div className="hidden md:block w-[40%]">
-          <TextInput size="primary" value={value} onChange={handleOnChange} />
+          <TextInput
+            size="primary"
+            value={value}
+            onChange={handleOnChange}
+            onKeyDown={handleSearch}
+          />
         </div>
 
         <div className="block md:hidden text-2xl mr-6">
