@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
 import { Hamburger, HeartIcon } from '../Icon/index';
 import useDebounce from '../../../hooks/useDebounce';
@@ -7,6 +7,7 @@ import useDebounce from '../../../hooks/useDebounce';
 function Header() {
   const [value, setValue] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const location = useLocation();
   const debouncedValue = useDebounce(value, 500);
 
   const navigate = useNavigate();
@@ -28,10 +29,10 @@ function Header() {
   };
 
   useEffect(() => {
-    if (debouncedValue === '') {
+    if (debouncedValue === '' && location.pathname === '/product') {
       navigate('/product');
     }
-  }, [debouncedValue, navigate]);
+  }, [debouncedValue, navigate, location.pathname]);
 
   return (
     <header className="fixed w-full bg-white z-50 top-0 h-[64px]">
