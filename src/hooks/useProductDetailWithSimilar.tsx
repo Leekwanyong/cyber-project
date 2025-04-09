@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getStoreDetail, getStoreDetailApi } from '../api/getStoreApi';
 
+const LIMIT = 5;
 function useProductDetailWithSimilar(id: string | undefined) {
   const productDetailQuery = useQuery({
     queryKey: ['productDetail', id],
@@ -12,7 +13,7 @@ function useProductDetailWithSimilar(id: string | undefined) {
 
   const similarProductsQuery = useQuery({
     queryKey: ['similarProducts', category ?? 'unknown'],
-    queryFn: () => getStoreDetail(category!),
+    queryFn: () => getStoreDetail(category!, LIMIT),
     enabled: !!category,
   });
 
