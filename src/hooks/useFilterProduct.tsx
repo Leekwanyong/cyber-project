@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Product } from '../types/card';
 
 function useFilterProduct(
@@ -6,8 +6,7 @@ function useFilterProduct(
   filteredBrands: string[],
   searchKeyword: string | undefined
 ) {
-  const [sortBy, setSortBy] = useState<string>('asc');
-
+  const normalizedKeyword = searchKeyword?.trim().toLowerCase();
   const filteredProducts = useMemo(
     () =>
       !filteredBrands || filteredBrands?.length === 0
@@ -16,25 +15,14 @@ function useFilterProduct(
     [filteredBrands, product]
   );
 
-  const filteredSearchKeyword = useMemo(() => {
-    if (!searchKeyword) return filteredProducts;
-    return filteredProducts.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(searchKeyword) ||
-        item.description.toLowerCase().includes(searchKeyword)
-      );
-    });
-  }, [filteredProducts, searchKeyword]);
+  if (!normalizedKeyword) return filteredProducts;
 
-  const sortOrderData = useMemo(
-    () =>
-      [...(filteredSearchKeyword ?? [])].sort((a, b) =>
-        sortBy === 'asc' ? a.price - b.price : b.price - a.price
-      ),
-    [filteredSearchKeyword, sortBy]
-  );
-
-  return { setSortBy, sortOrderData };
+  return filteredProducts.filter((item) => {
+    return (
+      item.title.toLowerCase().includes(normalizedKeyword) ||
+      item.description.toLowerCase().includes(normalizedKeyword)
+    );
+  });
 }
 
 export default useFilterProduct;
