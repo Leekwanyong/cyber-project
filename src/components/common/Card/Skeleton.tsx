@@ -5,9 +5,9 @@ interface Props {
 function Skeleton({ count = 1 }: Props) {
   return (
     <>
-      {Array.from({ length: count }).map((_, i) => (
+      {Array.from({ length: count }).map(() => (
         <div
-          key={`skeleton-${i}`}
+          key={crypto.randomUUID()}
           className="bg-white shadow-md rounded-2xl overflow-hidden animate-pulse"
         >
           <div className="w-full h-[150px] bg-gray-200" />

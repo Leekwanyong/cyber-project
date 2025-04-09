@@ -7,7 +7,12 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-function Button({ children, onClick, size = 'primary', color = 'primary' }: ButtonProps) {
+function Button({
+  children,
+  onClick = () => {},
+  size = 'primary',
+  color = 'primary',
+}: ButtonProps) {
   const baseStyle = 'rounded-md font-semibold outline-none border inline-block';
 
   const sizeStyle = {

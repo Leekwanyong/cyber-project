@@ -34,7 +34,7 @@ function InfinityProductList({ limit, filteredBrands }: InfinityProductListProps
 
       <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {isFetchingNextPage && isLoading
-          ? Array.from({ length: LENGTH }).map((_, i) => <Skeleton key={`infinity-${i}`} />)
+          ? Array.from({ length: LENGTH }).map(() => <Skeleton key={crypto.randomUUID()} />)
           : sortOrderData.map((order) => (
               <ProductItem key={order.id} isInFirstViewport={false} item={order} />
             ))}
