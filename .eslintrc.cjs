@@ -25,7 +25,9 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    'react/no-array-index-key': 'off',
     'prettier/prettier': 'error',
+    'react/require-default-props': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     '@typescript-eslint/no-unused-vars': ['error'],
