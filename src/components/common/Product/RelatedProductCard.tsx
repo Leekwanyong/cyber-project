@@ -1,7 +1,6 @@
 import { Product } from '../../../types/card';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
-import imageFallbackHandler from '../../../utils/image';
-import DefaultImg from '../../../assets/defaultImg.png';
+import imageFallbackHandler from '../../../hooks/useImageError';
 
 interface RelatedProductCardProps {
   product: Product;
@@ -25,7 +24,9 @@ function RelatedProductCard({ product }: RelatedProductCardProps) {
             src={product.thumbnail}
             alt={product.title}
             className="w-full h-30 object-cover"
-            onError={imageFallbackHandler(DefaultImg, product.thumbnail || '')}
+            width={300}
+            height={300}
+            onError={imageFallbackHandler()}
           />
         </picture>
         <div className="p-3">
