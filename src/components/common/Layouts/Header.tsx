@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../Input/TextInput';
 import { Hamburger, HeartIcon } from '../Icon/index';
@@ -7,7 +7,8 @@ import useDebounce from '../../../hooks/useDebounce';
 function Header() {
   const [value, setValue] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  useDebounce(value, 500);
+  const debouncedValue = useDebounce(value, 500);
+
   const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,10 +20,18 @@ function Header() {
   };
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      navigate(`product?search=${value}`);
+    if (debouncedValue) {
+      if (e.key === 'Enter') {
+        navigate(`product?search=${value}`);
+      }
     }
   };
+
+  useEffect(() => {
+    if (debouncedValue === '') {
+      navigate('/product');
+    }
+  }, [debouncedValue, navigate]);
 
   return (
     <header className="fixed w-full bg-white z-50 top-0 h-[64px]">
