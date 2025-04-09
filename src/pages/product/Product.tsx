@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Aside from './Aside';
 import { ASIDE_DATA } from '../../constants/aside';
 import InfinityProductList from '../../components/common/Card/InfinityProductList';
@@ -8,6 +9,8 @@ import FloatingButton from '../../components/common/Button/FloatingButton';
 const MAX_LIMIT = 12;
 function Product() {
   const [asideData, setAsideData] = useState<FilterOptions>(ASIDE_DATA);
+  const [searchParams] = useSearchParams();
+  const searchKeyword = searchParams.get('search')?.toLowerCase() ?? '';
 
   const filteredBrands = useMemo(
     () =>
@@ -27,6 +30,7 @@ function Product() {
           filteredBrands={filteredBrands}
           limit={MAX_LIMIT}
           isLastSection={false}
+          searchKeyword={searchKeyword}
         />
       </div>
 
