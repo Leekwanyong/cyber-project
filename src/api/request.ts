@@ -1,9 +1,8 @@
 const request = {
-  getStoreApi: (category: string, limit: number) => `/category/${category}?limit=${limit}`,
-  getStoreAllListApi: (limit: number, pageParam: number) => `limit=${limit}&skip=${pageParam}`,
+  getStoreApi: (category: string) => `/category/${category}`,
+  getStoreAllListApi: '/',
   getStoreDetailApi: (id: string | undefined) => `/${id}`,
-  getStoreDetailRecommendedProduct: (category: string | undefined, limit: number) =>
-    `/category/${category}?limit=${limit}`,
+  getStoreDetailRecommendedProduct: (category: string | undefined) => `/category/${category}`,
 };
 
 export default request;
