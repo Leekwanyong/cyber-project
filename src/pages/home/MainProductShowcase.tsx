@@ -1,22 +1,30 @@
-import Ps5 from '../../assets/PlayStation.png';
-import MacBook from '../../assets/MacBookPro.png';
-import AirPodMax from '../../assets/AirPodsMax.png';
-import VisionPro from '../../assets/VIsionPro.png';
+import Ps5Png from '../../assets/PlayStation.png';
+import MacBookPng from '../../assets/MacBookPro.png';
+import AirPodMaxPng from '../../assets/AirPodsMax.png';
+import VisionProPng from '../../assets/VIsionPro.png';
+import Ps5Webp from '../../assets/PlayStation.webp';
+import MacBookWebp from '../../assets/MacBookPro.webp';
+import AirPodMaxWebp from '../../assets/AirPodsMax.webp';
+import VisionProWebp from '../../assets/VIsionPro.webp';
 import Button from '../../components/common/Button/Button';
-import imageFallbackHandler from '../../utils/image';
-import DefaultImg from '../../assets/defaultImg.png';
+import imageFallbackHandler from '../../hooks/useImageError';
 
 function MainProductShowcase() {
   return (
     <section className="mt-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10  items-start">
         <div className="flex flex-col items-center custom930:flex-row gap-6">
-          <img
-            src={Ps5}
-            alt="Playstation5"
-            onError={imageFallbackHandler(DefaultImg, Ps5)}
-            className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
-          />
+          <picture>
+            <source type="image/webp" srcSet={Ps5Webp} />
+            <img
+              src={Ps5Png}
+              alt="Playstation5"
+              onError={imageFallbackHandler()}
+              width={400}
+              height={400}
+              className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
+            />
+          </picture>
           <div className="text-center max-w-[400px] w-full sm:text-left ">
             <h2 className="text-3xl sm:text-5xl font-medium leading-tight mb-2">Playstation 5</h2>
             <p className="text-sm sm:text-base text-gray-500 leading-6">
@@ -28,12 +36,18 @@ function MainProductShowcase() {
         </div>
 
         <div className="flex flex-col items-center custom930:flex-row gap-6">
-          <img
-            src={MacBook}
-            alt="Macbook Air"
-            className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
-            onError={imageFallbackHandler(DefaultImg, MacBook)}
-          />
+          <picture>
+            <source type="image/webp" srcSet={MacBookWebp} />
+
+            <img
+              src={MacBookPng}
+              alt="Macbook Air"
+              width={400}
+              height={400}
+              className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
+              onError={imageFallbackHandler()}
+            />
+          </picture>
           <div className="text-center max-w-[400px] w-full h-full sm:text-left">
             <h2 className="text-4xl sm:text-6xl font-thin leading-tight">
               Macbook <span className="font-thin">Air</span>
@@ -49,12 +63,18 @@ function MainProductShowcase() {
         </div>
 
         <div className="flex flex-col items-center custom930:flex-row gap-6">
-          <img
-            src={AirPodMax}
-            alt="Apple AirPods Max"
-            onError={imageFallbackHandler(DefaultImg, AirPodMax)}
-            className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
-          />
+          <picture>
+            <source type="image/webp" srcSet={AirPodMaxWebp} />
+
+            <img
+              src={AirPodMaxPng}
+              alt="Apple AirPods Max"
+              width={400}
+              height={400}
+              onError={imageFallbackHandler()}
+              className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
+            />
+          </picture>
           <div className="text-center max-w-[400px] w-full sm:text-left">
             <h2 className="text-2xl sm:text-3xl leading-tight">Apple AirPods Max</h2>
             <p className="text-sm text-gray-500 leading-6">
@@ -64,12 +84,17 @@ function MainProductShowcase() {
         </div>
 
         <div className="flex flex-col items-center custom930:flex-row gap-6">
-          <img
-            src={VisionPro}
-            alt="Apple Vision Pro"
-            onError={imageFallbackHandler(DefaultImg, VisionPro)}
-            className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
-          />
+          <picture>
+            <source type="image/webp" srcSet={VisionProWebp} />
+            <img
+              src={VisionProPng}
+              alt="Apple Vision Pro"
+              width={400}
+              height={400}
+              onError={imageFallbackHandler()}
+              className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
+            />
+          </picture>
           <div className="text-center max-w-[400px] w-full sm:text-left">
             <h2 className="text-2xl sm:text-3xl leading-tight">Apple Vision Pro</h2>
             <p className="text-sm text-gray-400 leading-6">
