@@ -17,6 +17,8 @@ function StoredWishlist() {
           <img
             src={product.thumbnail}
             alt={product.title}
+            width={300}
+            height={300}
             className="w-full md:w-[150px] h-auto object-cover rounded-md"
           />
           <div className="flex flex-col gap-1 text-sm md:text-base">

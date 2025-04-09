@@ -1,10 +1,27 @@
-import Promo from '../../assets/Promo.png';
+import PromoPng from '../../assets/Promo.png';
+import PromoWebp from '../../assets/Promo.webp';
 import Button from '../../components/common/Button/Button';
+import useImageError from '../../hooks/useImageError';
 
 function MainPromo() {
   return (
     <section className="relative">
-      <img src={Promo} alt="promo" className="w-full h-auto object-cover" />
+      <picture>
+        <source
+          type="image/webp"
+          srcSet={PromoWebp}
+          sizes="(max-width: 768px) 90vw, (max-width: 1440px) 100vw, 1440px"
+        />
+        <img
+          src={PromoPng}
+          alt="promo"
+          onError={useImageError()}
+          width={720}
+          height={200}
+          loading="lazy"
+          className="w-full max-w-[1440px] h-auto object-cover"
+        />
+      </picture>
       <div
         className="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
                   text-center flex flex-col items-center justify-center gap-2
