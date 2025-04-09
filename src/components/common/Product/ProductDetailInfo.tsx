@@ -7,8 +7,7 @@ import { Product } from '../../../types/card';
 import ProductDetailSkeleton from './ProductDetailSkeleton';
 import useProductDetailWithSimilar from '../../../hooks/useProductDetailWithSimilar';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
-import imageFallbackHandler from '../../../utils/image';
-import DefaultImg from '../../../assets/defaultImg.png';
+import imageFallbackHandler from '../../../hooks/useImageError';
 
 const LENGTH = 4;
 
@@ -33,10 +32,9 @@ function ProductDetailInfo() {
             <img
               src={detailAndRelated.detail.data?.thumbnail}
               alt={detailAndRelated.detail.data?.title}
-              onError={imageFallbackHandler(
-                DefaultImg,
-                detailAndRelated.detail.data?.thumbnail || ''
-              )}
+              width={300}
+              height={300}
+              onError={imageFallbackHandler()}
               className="w-full max-w-[400px] h-auto object-cover rounded-xl shadow-md"
             />
           </picture>
