@@ -5,8 +5,7 @@ import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
 import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
-import imageFallbackHandler from '../../../utils/image';
-import DefaultImg from '../../../assets/defaultImg.png';
+import imageFallbackHandler from '../../../hooks/useImageError';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
 import useLazyImage from '../../../hooks/useLazyImg';
 
@@ -38,7 +37,9 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
             src={item.thumbnail}
             alt={item.title}
             ref={lazyImage}
-            onError={imageFallbackHandler(DefaultImg, item.thumbnail)}
+            width={300}
+            height={400}
+            onError={imageFallbackHandler()}
             loading={isInFirstViewport ? 'eager' : 'lazy'}
           />
         </picture>
