@@ -6,12 +6,20 @@ import RelatedProductCard from './RelatedProductCard';
 import { Product } from '../../../types/card';
 import ProductDetailSkeleton from './ProductDetailSkeleton';
 import useProductDetailWithSimilar from '../../../hooks/useProductDetailWithSimilar';
+import UseOptimizedImage from '../../../hooks/useOptimizedImage';
+import imageFallbackHandler from '../../../utils/image';
+import DefaultImg from '../../../assets/defaultImg.png';
 
 const LENGTH = 4;
 
 function ProductDetailInfo() {
   const { id } = useParams();
   const detailAndRelated = useProductDetailWithSimilar(id);
+  const optimizedImage = UseOptimizedImage({
+    url: detailAndRelated.detail.data?.thumbnail || '',
+    isWebp: true,
+    width: 300,
+  });
 
   if (detailAndRelated.detail.isLoading) return <ProductDetailSkeleton />;
 
@@ -19,11 +27,19 @@ function ProductDetailInfo() {
     <section>
       <article className="flex flex-col md:flex-row gap-8 px-4 md:px-0 mt-28 mb-24 max-w-7xl mx-auto">
         <div className="flex-1 flex flex-col justify-center items-center gap-4">
-          <img
-            src={detailAndRelated.detail.data?.thumbnail}
-            alt={detailAndRelated.detail.data?.title}
-            className="w-full max-w-[400px] h-auto object-cover rounded-xl shadow-md"
-          />
+          <picture>
+            <source type="image/webp" srcSet={optimizedImage} />
+
+            <img
+              src={detailAndRelated.detail.data?.thumbnail}
+              alt={detailAndRelated.detail.data?.title}
+              onError={imageFallbackHandler(
+                DefaultImg,
+                detailAndRelated.detail.data?.thumbnail || ''
+              )}
+              className="w-full max-w-[400px] h-auto object-cover rounded-xl shadow-md"
+            />
+          </picture>
         </div>
 
         <div className="flex-1 flex flex-col justify-between gap-4">

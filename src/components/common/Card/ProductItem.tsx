@@ -7,11 +7,14 @@ import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
 import imageFallbackHandler from '../../../utils/image';
 import DefaultImg from '../../../assets/defaultImg.png';
+import UseOptimizedImage from '../../../hooks/useOptimizedImage';
+import useLazyImage from '../../../hooks/useLazyImg';
 
 function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
+  const lazyImage = useLazyImage();
+  const optimizedImage = UseOptimizedImage({ url: item.thumbnail || '', isWebp: true, width: 300 });
   const handleOnToggleClick = () => {
     dispatch(toggleWishlist(item));
   };
@@ -29,12 +32,16 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
       </div>
 
       <div className="flex items-center justify-center">
-        <img
-          src={item.thumbnail}
-          alt={item.title}
-          onError={imageFallbackHandler(DefaultImg, item.thumbnail)}
-          loading={isInFirstViewport ? 'eager' : 'lazy'}
-        />
+        <picture>
+          <source type="image/webp" srcSet={optimizedImage} />
+          <img
+            src={item.thumbnail}
+            alt={item.title}
+            ref={lazyImage}
+            onError={imageFallbackHandler(DefaultImg, item.thumbnail)}
+            loading={isInFirstViewport ? 'eager' : 'lazy'}
+          />
+        </picture>
       </div>
 
       <div className="flex flex-col items-center justify-center gap-2 mt-4">
