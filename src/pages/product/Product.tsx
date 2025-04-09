@@ -10,7 +10,7 @@ const MAX_LIMIT = 12;
 function Product() {
   const [asideData, setAsideData] = useState<FilterOptions>(ASIDE_DATA);
   const [searchParams] = useSearchParams();
-  const searchKeyword = searchParams.get('search')?.toLowerCase() ?? '';
+  const searchKeyword = searchParams.get('search')?.trim().toLowerCase() ?? '';
 
   const filteredBrands = useMemo(
     () =>
