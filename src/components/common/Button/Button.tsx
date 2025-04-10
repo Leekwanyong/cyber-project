@@ -28,7 +28,7 @@ function Button({
 
   const colorStyle = {
     primary: 'bg-black text-white border-none',
-    mediumBlack: 'bg-transparent text-black border-black border',
+    mediumBlack: 'bg-black text-white border-black border',
     mediumWhite: 'bg-transparent text-white border-white border',
   }[color];
 
