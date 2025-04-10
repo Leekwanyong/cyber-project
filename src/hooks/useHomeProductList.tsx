@@ -9,6 +9,7 @@ function useHomeProductList(category: string, limit: number) {
   });
   return {
     isLoading: homeQuery.isLoading,
+    isError: homeQuery.isError,
     data: homeQuery.data ?? [],
   };
 }
