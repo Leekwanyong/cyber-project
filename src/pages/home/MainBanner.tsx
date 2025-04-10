@@ -32,6 +32,8 @@ function MainBanner() {
             onError={imageFallbackHandler}
             width={1440}
             height={400}
+            loading="eager"
+            fetchPriority="high"
             className="w-full max-w-[720px] h-auto object-cover max-[768px]:w-[90%]"
           />
         </picture>
