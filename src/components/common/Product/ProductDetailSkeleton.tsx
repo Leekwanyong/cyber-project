@@ -1,3 +1,5 @@
+import React from 'react';
+
 function ProductDetailSkeleton() {
   return (
     <section>
@@ -23,4 +25,4 @@ function ProductDetailSkeleton() {
     </section>
   );
 }
-export default ProductDetailSkeleton;
+export default React.memo(ProductDetailSkeleton);

@@ -5,16 +5,20 @@ const LIMIT = 5;
 function useProductDetailWithSimilar(id: string | undefined) {
   const productDetailQuery = useQuery({
     queryKey: ['productDetail', id],
-    queryFn: () => getStoreDetailApi(id!),
-    enabled: !!id,
+    queryFn: () => {
+      return getStoreDetailApi(id!);
+    },
+    enabled: Boolean(id),
   });
 
   const category = productDetailQuery.data?.category;
 
   const similarProductsQuery = useQuery({
     queryKey: ['similarProducts', category ?? 'unknown'],
-    queryFn: () => getStoreDetail(category!, LIMIT),
-    enabled: !!category,
+    queryFn: () => {
+      return getStoreDetail(category!, LIMIT);
+    },
+    enabled: Boolean(category),
   });
 
   return {

@@ -1,6 +1,6 @@
 import { Product } from '../../../types/card';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
-import imageFallbackHandler from '../../../hooks/useImageError';
+import imageErrorHandler from '../../../util/imageErrorHandler';
 
 interface RelatedProductCardProps {
   product: Product;
@@ -12,6 +12,7 @@ function RelatedProductCard({ product }: RelatedProductCardProps) {
     isWebp: true,
     width: 300,
   });
+
   return (
     <article className="mt-12 mb-28 px-4 md:px-0 max-w-7xl mx-auto">
       <div
@@ -26,7 +27,7 @@ function RelatedProductCard({ product }: RelatedProductCardProps) {
             className="w-full h-30 object-cover"
             width={300}
             height={300}
-            onError={imageFallbackHandler()}
+            onError={imageErrorHandler}
           />
         </picture>
         <div className="p-3">

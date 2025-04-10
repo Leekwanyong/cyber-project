@@ -1,3 +1,4 @@
+import React from 'react';
 import Ps5Png from '../../assets/PlayStation.png';
 import MacBookPng from '../../assets/MacBookPro.png';
 import AirPodMaxPng from '../../assets/AirPodsMax.png';
@@ -7,7 +8,7 @@ import MacBookWebp from '../../assets/MacBookPro.webp';
 import AirPodMaxWebp from '../../assets/AirPodsMax.webp';
 import VisionProWebp from '../../assets/VIsionPro.webp';
 import Button from '../../components/common/Button/Button';
-import imageFallbackHandler from '../../hooks/useImageError';
+import imageFallbackHandler from '../../util/imageErrorHandler';
 
 function MainProductShowcase() {
   return (
@@ -19,7 +20,7 @@ function MainProductShowcase() {
             <img
               src={Ps5Png}
               alt="Playstation5"
-              onError={imageFallbackHandler()}
+              onError={imageFallbackHandler}
               width={400}
               height={400}
               className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
@@ -38,14 +39,13 @@ function MainProductShowcase() {
         <div className="flex flex-col items-center custom930:flex-row gap-6">
           <picture>
             <source type="image/webp" srcSet={MacBookWebp} />
-
             <img
               src={MacBookPng}
               alt="Macbook Air"
               width={400}
               height={400}
               className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
-              onError={imageFallbackHandler()}
+              onError={imageFallbackHandler}
             />
           </picture>
           <div className="text-center max-w-[400px] w-full h-full sm:text-left">
@@ -71,7 +71,7 @@ function MainProductShowcase() {
               alt="Apple AirPods Max"
               width={400}
               height={400}
-              onError={imageFallbackHandler()}
+              onError={imageFallbackHandler}
               className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
             />
           </picture>
@@ -91,7 +91,7 @@ function MainProductShowcase() {
               alt="Apple Vision Pro"
               width={400}
               height={400}
-              onError={imageFallbackHandler()}
+              onError={imageFallbackHandler}
               className="w-full sm:w-[250px] max-w-[250px] max-h-[250px] object-contain"
             />
           </picture>
@@ -107,4 +107,4 @@ function MainProductShowcase() {
   );
 }
 
-export default MainProductShowcase;
+export default React.memo(MainProductShowcase);
