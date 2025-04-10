@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { CategoryListProps } from '../../../types/card';
 import { HeartIcon } from '../Icon/index';
 import Button from '../Button/Button';
 import { AppDispatch } from '../../../redux/store';
 import { toggleWishlist } from '../../../redux/slice/wishlistSlice';
-import imageFallbackHandler from '../../../hooks/useImageError';
+import imageFallbackHandler from '../../../util/imageErrorHandler';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
 import useLazyImage from '../../../hooks/useLazyImg';
 
@@ -39,7 +40,7 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
             ref={lazyImage}
             width={300}
             height={400}
-            onError={imageFallbackHandler()}
+            onError={imageFallbackHandler}
             loading={isInFirstViewport ? 'eager' : 'lazy'}
           />
         </picture>
@@ -56,4 +57,4 @@ function ProductItem({ item, isInFirstViewport }: CategoryListProps) {
   );
 }
 
-export default ProductItem;
+export default React.memo(ProductItem);
