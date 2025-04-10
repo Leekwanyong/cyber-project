@@ -1,51 +1,42 @@
-import { useState } from 'react';
-import { InfinityProductListProps, Product } from '../../../types/card';
+import { useMemo, useState } from 'react';
+import { InfinityProductListProps } from '../../../types/card';
 import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 import useFilterProduct from '../../../hooks/useFilterProduct';
-import Skeleton from './Skeleton';
-import ProductItem from './ProductItem';
 import useInfiniteProductList from '../../../hooks/useInfiniteProductList';
+import SortButtons from '../Product/SortButtons';
+import ProductGrid from '../Product/ProductGrid';
 
-const LENGTH = 12;
 function InfinityProductList({ limit, filteredBrands, searchKeyword }: InfinityProductListProps) {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteProductList(limit);
-  const [sortedList, setSortedList] = useState<Product[] | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
   const observerRef = useIntersectionObserver(hasNextPage, fetchNextPage);
-  const FilterProduct = useFilterProduct(data, filteredBrands, searchKeyword);
+  const filterProduct = useFilterProduct(data, filteredBrands, searchKeyword);
+
+  const filteredSortData = useMemo(() => {
+    const result = filterProduct;
+
+    if (sortOrder) {
+      return [...result].sort((a, b) =>
+        sortOrder === 'asc' ? a.price - b.price : b.price - a.price
+      );
+    }
+
+    return result;
+  }, [filterProduct, sortOrder]);
 
   const handleSort = (order: 'asc' | 'desc') => {
-    data.sort((a, b) => (order === 'asc' ? a.price - b.price : b.price - a.price));
-    setSortedList(data);
+    setSortOrder(order);
   };
-  const productToRender = sortedList ?? FilterProduct;
+
   return (
     <div className="mt-10">
-      <div className="flex items-center  gap-4 mb-6">
-        <button
-          type="button"
-          onClick={() => handleSort('desc')}
-          className="px-4 py-2 border rounded hover:bg-gray-100"
-        >
-          가격 높은 순
-        </button>
-        <button
-          type="button"
-          onClick={() => handleSort('asc')}
-          className="px-4 py-2 border rounded hover:bg-gray-100"
-        >
-          가격 낮은 순
-        </button>
-      </div>
-
-      <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {isFetchingNextPage && isLoading
-          ? Array.from({ length: LENGTH }).map(() => <Skeleton key={crypto.randomUUID()} />)
-          : productToRender.map((order) => (
-              <ProductItem key={order.id} isInFirstViewport={false} item={order} />
-            ))}
-      </ul>
-
+      <SortButtons currentSort={sortOrder} onSort={handleSort} />
+      <ProductGrid
+        products={filteredSortData}
+        isLoading={isLoading}
+        isFetchingNextPage={isFetchingNextPage}
+      />
       {hasNextPage && <div ref={observerRef} className="mt-10 h-8" />}
     </div>
   );
