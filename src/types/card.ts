@@ -16,13 +16,13 @@ export interface Product {
 export interface HomeProductQuery {
   category: ProductListCategory;
   limit: number;
-  isLastSection: boolean;
 }
 
 export interface InfinityProductListProps {
   isLastSection: boolean;
   filteredBrands: string[];
   limit: number;
+  searchKeyword?: string;
 }
 
 export interface CategoryListProps {
