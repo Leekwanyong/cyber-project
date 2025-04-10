@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { removeWishlist } from '../../../redux/slice/wishlistSlice';
 import FloatingButton from '../Button/FloatingButton';
+import imageFallbackHandler from '../../../util/imageErrorHandler';
 
 function StoredWishlist() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,7 @@ function StoredWishlist() {
             alt={product.title}
             width={300}
             height={300}
+            onError={imageFallbackHandler}
             className="w-full md:w-[150px] h-auto object-cover rounded-md"
           />
           <div className="flex flex-col gap-1 text-sm md:text-base">
