@@ -7,7 +7,7 @@ import { Product } from '../../../types/card';
 import ProductDetailSkeleton from './ProductDetailSkeleton';
 import useProductDetailWithSimilar from '../../../hooks/useProductDetailWithSimilar';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
-import imageFallbackHandler from '../../../hooks/useImageError';
+import imageFallbackHandler from '../../../util/imageErrorHandler';
 
 const LENGTH = 4;
 
@@ -28,13 +28,12 @@ function ProductDetailInfo() {
         <div className="flex-1 flex flex-col justify-center items-center gap-4">
           <picture>
             <source type="image/webp" srcSet={optimizedImage} />
-
             <img
               src={detailAndRelated.detail.data?.thumbnail}
               alt={detailAndRelated.detail.data?.title}
               width={300}
               height={300}
-              onError={imageFallbackHandler()}
+              onError={imageFallbackHandler}
               className="w-full max-w-[400px] h-auto object-cover rounded-xl shadow-md"
             />
           </picture>

@@ -1,7 +1,7 @@
 import PromoPng from '../../assets/Promo.png';
 import PromoWebp from '../../assets/Promo.webp';
 import Button from '../../components/common/Button/Button';
-import useImageError from '../../hooks/useImageError';
+import imageFallbackHandler from '../../util/imageErrorHandler';
 
 function MainPromo() {
   return (
@@ -15,7 +15,7 @@ function MainPromo() {
         <img
           src={PromoPng}
           alt="promo"
-          onError={useImageError()}
+          onError={imageFallbackHandler}
           width={720}
           height={200}
           loading="lazy"

@@ -1,7 +1,7 @@
 import IphoneWebp from '../../assets/Iphone.webp';
 import IphonePng from '../../assets/Iphone.png';
 import Button from '../../components/common/Button/Button';
-import imageFallbackHandler from '../../hooks/useImageError';
+import imageFallbackHandler from '../../util/imageErrorHandler';
 
 function MainBanner() {
   return (
@@ -29,7 +29,7 @@ function MainBanner() {
           <img
             src={IphonePng}
             alt="Iphone"
-            onError={imageFallbackHandler()}
+            onError={imageFallbackHandler}
             width={1440}
             height={400}
             className="w-full max-w-[720px] h-auto object-cover max-[768px]:w-[90%]"
