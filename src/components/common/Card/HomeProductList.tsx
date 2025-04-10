@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import useHomeProductList from '../../../hooks/useHomeProductList';
-import Skeleton from './Skeleton';
+import Skeleton from '../Skeleton/Skeleton';
 import ProductItem from './ProductItem';
 import { HomeProductQuery } from '../../../types/card';
 

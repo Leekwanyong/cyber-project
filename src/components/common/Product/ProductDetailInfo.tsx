@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import Button from '../Button/Button';
 import FloatingButton from '../Button/FloatingButton';
-import Skeleton from '../Card/Skeleton';
+import Skeleton from '../Skeleton/Skeleton';
 import RelatedProductCard from './RelatedProductCard';
 import { Product } from '../../../types/card';
-import ProductDetailSkeleton from './ProductDetailSkeleton';
+import ProductDetailSkeleton from '../Skeleton/ProductDetailSkeleton';
 import useProductDetailWithSimilar from '../../../hooks/useProductDetailWithSimilar';
 import UseOptimizedImage from '../../../hooks/useOptimizedImage';
 import imageFallbackHandler from '../../../util/imageErrorHandler';

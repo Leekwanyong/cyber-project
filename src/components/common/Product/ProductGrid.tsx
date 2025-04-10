@@ -1,5 +1,5 @@
 import React from 'react';
-import Skeleton from '../Card/Skeleton';
+import Skeleton from '../Skeleton/Skeleton';
 import ProductItem from '../Card/ProductItem';
 import type { Product } from '../../../types/card';
 
