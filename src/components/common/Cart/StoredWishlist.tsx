@@ -4,6 +4,7 @@ import { removeWishlist } from '../../../redux/slice/wishlistSlice';
 import FloatingButton from '../Button/FloatingButton';
 import imageFallbackHandler from '../../../util/imageErrorHandler';
 import SeoMetaTag from '../../../util/SEOMetaTag';
+import Iphone from '../../../assets/Iphone.png';
 
 function StoredWishlist() {
   const dispatch = useDispatch<AppDispatch>();
@@ -11,14 +12,13 @@ function StoredWishlist() {
 
   return (
     <div>
-      {wishlist.map((product) => (
-        <SeoMetaTag
-          key={product?.id}
-          title={product?.title}
-          description={product?.description}
-          url={product?.thumbnail}
-        />
-      ))}
+      <SeoMetaTag
+        title={wishlist[0]?.title ?? '위시리스트'}
+        description={wishlist[0]?.description ?? '내가 찜한 상품 목록입니다'}
+        url={window.location.href ?? 'https://cyber-project-amber.vercel.app/wishlist'}
+        imageUrl={wishlist[0]?.thumbnail ?? Iphone}
+        siteName={window.location.href ?? 'https://cyber-project-amber.vercel.app/wishlist'}
+      />
       <section className="mt-24 mb-24 flex flex-col  gap-6">
         {wishlist.map((product) => (
           <div

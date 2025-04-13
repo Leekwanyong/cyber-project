@@ -25,7 +25,13 @@ function Product() {
 
   return (
     <div>
-      <SeoMetaTag title="Product" description="Product Page" url={Promo} />
+      <SeoMetaTag
+        title="Product"
+        description="Product Page"
+        url={window.location.href}
+        siteName={window.location.href}
+        imageUrl={Promo}
+      />
       <section className="grid grid-cols-1 md:grid-cols-[16rem_1fr] gap-6 mt-24 px-4 md:px-8">
         <Aside asideData={asideData} setAsideData={setAsideData} />
 

@@ -11,7 +11,13 @@ const HOME_QUERY_MAX_LENGTH: [number, number] = [8, 4];
 function Home() {
   return (
     <div>
-      <SeoMetaTag title="Cyber Store" description="e-commerce Store" url={Iphone15} />
+      <SeoMetaTag
+        title="Cyber Store"
+        description="e-commerce Store"
+        url={window.location.href ?? 'https://cyber-project-amber.vercel.app/'}
+        siteName={window.location.href ?? 'https://cyber-project-amber.vercel.app/'}
+        imageUrl={Iphone15}
+      />
       <MainBanner />
       <MainProductShowcase />
       {HOME_QUERY_MAX_LENGTH.map((product, index) => (
