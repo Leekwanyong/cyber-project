@@ -5,6 +5,8 @@ import { ASIDE_DATA } from '../../constants/aside';
 import InfinityProductList from '../../components/common/Card/InfinityProductList';
 import { FilterOptions } from '../../types/card';
 import FloatingButton from '../../components/common/Button/FloatingButton';
+import Promo from '../../assets/Promo.png';
+import SeoMetaTag from '../../util/SEOMetaTag';
 
 const MAX_LIMIT = 12;
 function Product() {
@@ -22,20 +24,23 @@ function Product() {
   );
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-[16rem_1fr] gap-6 mt-24 px-4 md:px-8">
-      <Aside asideData={asideData} setAsideData={setAsideData} />
+    <div>
+      <SeoMetaTag title="Product" description="Product Page" url={Promo} />
+      <section className="grid grid-cols-1 md:grid-cols-[16rem_1fr] gap-6 mt-24 px-4 md:px-8">
+        <Aside asideData={asideData} setAsideData={setAsideData} />
 
-      <div>
-        <InfinityProductList
-          filteredBrands={filteredBrands}
-          limit={MAX_LIMIT}
-          isLastSection={false}
-          searchKeyword={searchKeyword}
-        />
-      </div>
+        <div>
+          <InfinityProductList
+            filteredBrands={filteredBrands}
+            limit={MAX_LIMIT}
+            isLastSection={false}
+            searchKeyword={searchKeyword}
+          />
+        </div>
 
-      <FloatingButton />
-    </section>
+        <FloatingButton />
+      </section>
+    </div>
   );
 }
 
