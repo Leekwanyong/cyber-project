@@ -28,8 +28,9 @@ function ProductDetailInfo() {
       <SeoMetaTag
         title={detailAndRelated.detail.data?.title}
         description={detailAndRelated.detail.data?.description}
-        url={detailAndRelated.detail.data?.thumbnail}
-        siteName={window.location.href}
+        url={window.location.href ?? 'https://cyber-project-amber.vercel.app/product/'}
+        siteName={window.location.href ?? 'https://cyber-project-amber.vercel.app/product/'}
+        imageUrl={detailAndRelated.detail.data?.thumbnail}
       />
       <section>
         <article className="flex flex-col md:flex-row gap-8 px-4 md:px-0 mt-28 mb-24 max-w-7xl mx-auto">
