@@ -13,30 +13,30 @@ interface GetStoreAllListApi {
 }
 
 export const getStoreApi = async ({ category, limit }: GetStoreApi) => {
-  const response = await instance.get(request.getStoreApi(category), {
+  const response = await instance(request.getStoreApi(category), {
     params: { limit },
   });
-  return response.data.products;
+  return response.products;
 };
 
 export const getStoreAllListApi = async ({ limit, pageParam }: GetStoreAllListApi) => {
-  const response = await instance.get(request.getStoreAllListApi, {
+  const response = await instance(request.getStoreAllListApi, {
     params: {
       limit,
       skip: pageParam,
     },
   });
-  return response.data.products;
+  return response.products;
 };
 
 export const getStoreDetailApi = async (id: string | undefined): Promise<Product> => {
-  const response = await instance.get(request.getStoreDetailApi(id));
-  return response.data;
+  const response = await instance(request.getStoreDetailApi(id));
+  return response;
 };
 
 export const getStoreDetail = async (category: string | undefined, limit: number) => {
-  const response = await instance.get(request.getStoreDetailRecommendedProduct(category), {
+  const response = await instance(request.getStoreDetailRecommendedProduct(category), {
     params: { limit },
   });
-  return response.data.products;
+  return response.products;
 };
